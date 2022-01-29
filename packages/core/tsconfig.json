@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "useDefineForClassFields": true,
+    "jsx": "preserve",
+    "lib": ["esnext", "dom"]
+  },
+  "include": ["**/*.ts", "src/**/*.d.ts"]
+}

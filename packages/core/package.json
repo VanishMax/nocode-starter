@@ -1,0 +1,13 @@
+{
+  "name": "nocode-starter-core",
+  "version": "0.1.0",
+  "private": false,
+  "scripts": {},
+  "files": [
+    "index.ts"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^4.4.4"
+  }
+}
