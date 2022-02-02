@@ -3,8 +3,8 @@ import { IS_APP_NATIVE } from './utils/constants';
 
 const nativeAppRoute = IS_APP_NATIVE ? [{
   path: '/',
-  component: () => import('./components/HelloWorld.vue'),
-}]: [{
+  component: () => import('./pages/HelloWorld.vue'),
+}] : [{
   path: '/',
   redirect: '/app',
 }];
@@ -15,12 +15,12 @@ const router = createRouter({
     {
       path: '/app',
       name: 'app',
-      component: () => import('./components/App.vue'),
+      component: () => import('./pages/AppPage.vue'),
     },
     ...nativeAppRoute,
     {
       path: '/:pathMatch(.*)*',
-      component: () => import('./components/Error.vue'),
+      component: () => import('./pages/ErrorPage.vue'),
     },
   ],
 });
