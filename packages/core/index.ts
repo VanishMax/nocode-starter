@@ -1,3 +1,3 @@
-export interface Core {
-  hello: 'world',
-}
+export {
+  Model
+} from './types/model';

@@ -1,9 +1,9 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import { IS_APP_NATIVE } from './utils/constants';
 
-const nativeAppRoute = IS_APP_NATIVE ? [{
+const platformRoutes: RouteRecordRaw[] = IS_APP_NATIVE ? [{
   path: '/',
-  component: () => import('./pages/HelloWorld.vue'),
+  component: () => import('./pages/HomePage.vue'),
 }] : [{
   path: '/',
   redirect: '/app',
@@ -12,12 +12,12 @@ const nativeAppRoute = IS_APP_NATIVE ? [{
 const router = createRouter({
   history: createWebHistory(),
   routes: [
+    ...platformRoutes,
     {
       path: '/app',
       name: 'app',
       component: () => import('./pages/AppPage.vue'),
     },
-    ...nativeAppRoute,
     {
       path: '/:pathMatch(.*)*',
       component: () => import('./pages/ErrorPage.vue'),
