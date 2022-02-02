@@ -3,16 +3,24 @@
   "version": "0.1.0",
   "private": false,
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "dev:vite": "VITE_APP_NATIVE=false vite",
+    "dev:native": "VITE_APP_NATIVE=true vite",
+    "dev:tauri": "tauri dev",
+    "dev": "pnpm dev:vite",
+    "build:vite": "VITE_APP_NATIVE=false vue-tsc --noEmit && vite build",
+    "build:native": "VITE_APP_NATIVE=true vue-tsc --noEmit && vite build",
+    "build:tauri": "tauri build",
+    "build": "pnpm build:vite"
   },
   "dependencies": {
-    "vue": "^3.2.25"
+    "@tauri-apps/api": "^1.0.0-beta.8",
+    "vue": "^3.2.25",
+    "vue-router": "4"
   },
   "devDependencies": {
-    "nocode-starter-core": "workspace:*",
+    "@tauri-apps/cli": "^1.0.0-beta.10",
     "@vitejs/plugin-vue": "^2.0.0",
+    "nocode-starter-core": "workspace:*",
     "typescript": "^4.4.4",
     "vite": "^2.7.2",
     "vue-tsc": "^0.29.8"
