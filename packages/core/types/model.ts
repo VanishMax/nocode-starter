@@ -1,3 +1,3 @@
-export interface Model {
+export interface NocodeModel {
   project_name: string,
 }

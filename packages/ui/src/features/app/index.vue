@@ -21,17 +21,13 @@
 
 <script setup lang="ts">
 import { reactive } from 'vue';
-import type { Model } from 'nocode-starter-core';
-import loadModel from '~/utils/load-model';
-import saveModel from '~/utils/save-model';
+import type { NocodeModel } from 'nocode-starter-core';
+import nocodeModel from '~/shared/utils/model';
 
-const loadedModel = await loadModel();
-const modelData = reactive<Model>(loadedModel || {
-  project_name: '',
-});
+const modelData = reactive<NocodeModel>(await nocodeModel.load());
 
 const save = async () => {
-  await saveModel(modelData);
+  await nocodeModel.save(modelData);
 };
 </script>
 

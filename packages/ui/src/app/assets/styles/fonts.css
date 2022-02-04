@@ -1,0 +1,22 @@
+@font-face {
+  font-family: 'OpenSans';
+  font-style: normal;
+  font-weight: normal;
+  src: local('OpenSans-Regular'), url('../fonts/OpenSans-Regular.ttf') format('opentype');
+}
+
+@font-face {
+  font-family: 'OpenSans';
+  font-style: normal;
+  font-weight: bold;
+  src: local('OpenSans-Bold'), url('../fonts/OpenSans-Bold.ttf') format('opentype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OpenSans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('OpenSans-Light'), url('../fonts/OpenSans-Light.ttf') format('opentype');
+  font-display: swap;
+}
