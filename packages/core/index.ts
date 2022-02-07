@@ -4,4 +4,5 @@ export {
 
 export {
   NocodeConfig,
+  NocodeProject,
 } from './types/config';

@@ -29,6 +29,7 @@ module.exports = {
         parser: '@typescript-eslint/parser',
       },
       rules: {
+        'no-undef': 0,
         'vue/max-attributes-per-line': [1, {
           singleline: 3,
           multiline: 3,
@@ -44,7 +45,7 @@ module.exports = {
     'import/prefer-default-export': 0,
     'space-before-function-paren': [1, 'always'],
     'no-underscore-dangle': 0,
-    'no-console': ['error', { allow: ['warn', 'error'] }],
+    'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
     'no-trailing-spaces': 0,
     'no-unused-vars': 0,
     'vue/prop-name-casing': 0,
