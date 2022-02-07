@@ -1,6 +1,5 @@
 export interface NocodeProject {
   name: string,
-  path: string,
   logo?: string | File,
   accessedAt?: Date,
   createdAt?: Date,

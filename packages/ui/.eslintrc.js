@@ -16,7 +16,6 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  ignorePatterns: ['src-tauri/**/*'],
   plugins: [
     'vue',
     '@typescript-eslint',
