@@ -6,6 +6,7 @@
     "dev:vite": "VITE_APP_NATIVE=false vite",
     "dev": "pnpm dev:vite",
     "build:vite": "VITE_APP_NATIVE=false vue-tsc --noEmit && vite build",
+    "build:electron": "VITE_APP_NATIVE=true vue-tsc --noEmit && vite build",
     "build": "pnpm build:vite",
     "lint": "eslint --fix src"
   },

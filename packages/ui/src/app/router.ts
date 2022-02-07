@@ -1,16 +1,20 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import {
+  createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw,
+} from 'vue-router';
 import { IS_APP_NATIVE } from '~/shared/utils/constants';
 
 const platformRoutes: RouteRecordRaw[] = IS_APP_NATIVE ? [{
   path: '/',
+  name: 'home',
   component: () => import('~/features/projects/index.vue'),
 }] : [{
   path: '/',
+  name: 'home',
   redirect: '/app',
 }];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: IS_APP_NATIVE ? createWebHashHistory() : createWebHistory(),
   routes: [
     ...platformRoutes,
     {
