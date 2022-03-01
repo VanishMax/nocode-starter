@@ -45,6 +45,5 @@ const submit = () => {
     createdAt: new Date(),
     accessedAt: new Date(),
   };
-  console.log(data);
 };
 </script>

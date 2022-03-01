@@ -35,8 +35,29 @@ export class UserService {
     return response;
   }
 
-  async create(body: CreateUserDto): Promise<void> {
-    await this.db.collection<User>('users').insertOne(body);
+  async findByUsername(username: string): Promise<WithId<User> | null> {
+    if (
+      !username ||
+      typeof username !== 'string' ||
+      /^[^a-zA-Z]/.test(username)
+    ) {
+      throw new BadRequestException();
+    }
+
+    const res = await this.db.collection<User>('users').findOne({
+      username: username,
+    });
+
+    if (!res) {
+      return null;
+    }
+
+    return res;
+  }
+
+  async create(body: CreateUserDto): Promise<WithId<User>> {
+    const res = await this.db.collection<User>('users').insertOne(body);
+    return { ...body, _id: res.insertedId };
   }
 
   async delete(id: string): Promise<void> {
