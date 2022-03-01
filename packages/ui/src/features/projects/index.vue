@@ -1,5 +1,5 @@
 <template>
-  <ProjectsHeader />
+  <Header />
 
   <section class="max-w-6xl mx-auto pt-4 px-4 sm:px-6 text-center">
     <h2 class="text-3xl font-bold tracking-tight text-indigo-600 sm:text-4xl">
@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import ProjectsHeader from '~/features/projects/projects-header.vue';
+import Header from '~/shared/components/header/header.vue';
 import ProjectNewItem from '~/features/projects/project-new-item.vue';
 import ProjectItem from '~/features/projects/project-item.vue';
 import { useConfigStore } from '~/shared/store/config';
