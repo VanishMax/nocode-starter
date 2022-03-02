@@ -39,6 +39,7 @@ importers:
       eslint-plugin-prettier: ^4.0.0
       jest: ^27.2.5
       mongodb: ^4.4.0
+      nocode-starter-core: workspace:*
       prettier: ^2.3.2
       reflect-metadata: ^0.1.13
       rimraf: ^3.0.2
@@ -74,6 +75,7 @@ importers:
       eslint-config-prettier: 8.4.0_eslint@8.8.0
       eslint-plugin-prettier: 4.0.0_a5351b466bd3b2a209fc03a65c34b641
       jest: 27.5.1_ts-node@10.4.0
+      nocode-starter-core: link:../core
       prettier: 2.5.1
       source-map-support: 0.5.21
       supertest: 6.2.2

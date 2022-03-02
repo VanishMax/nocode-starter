@@ -1,7 +1,7 @@
-import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { CreateUserDto } from './create-user.dto';
-import { UserService } from './user.service';
-import type { User } from './user.interface';
+import { UserService } from './service';
+import type { User } from './types';
 import type { WithId } from 'mongodb';
 
 @Controller('users')
@@ -25,8 +25,7 @@ export class UserController {
       return user;
     }
 
-    const newUser = await this.usersService.create(body);
-    return newUser;
+    return this.usersService.create(body);
   }
 
   // @Put(':id')

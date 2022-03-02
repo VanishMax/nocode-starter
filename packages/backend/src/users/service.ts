@@ -4,7 +4,7 @@ import {
   NotFoundException,
   BadRequestException,
 } from '@nestjs/common';
-import { User } from './user.interface';
+import { User } from './types';
 import { Db, ObjectId, WithId } from 'mongodb';
 import { CreateUserDto } from './create-user.dto';
 

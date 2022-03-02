@@ -1,3 +1,4 @@
 export interface NocodeModel {
-  project_name: string,
+  color?: string,
+  project_name?: string,
 }
