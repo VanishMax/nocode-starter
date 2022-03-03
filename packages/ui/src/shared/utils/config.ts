@@ -3,9 +3,7 @@ import { LS_CONFIG_NAME } from '~/shared/utils/constants';
 import { useConfigStore } from '~/shared/store/config';
 import darkMode from '~/shared/utils/dark-mode';
 
-const initialConfig: NocodeConfig = {
-  projects: [],
-};
+const initialConfig: NocodeConfig = {};
 
 const loadConfig = (): NocodeConfig => {
   try {

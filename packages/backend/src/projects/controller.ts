@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { CreateProjectDto } from './create-project.dto';
 import { ProjectService } from './service';
-import type { Project } from './types';
+import type { AggregatedProject, Project } from './types';
 import type { WithId } from 'mongodb';
 
 @Controller('projects')
@@ -9,12 +9,12 @@ export class ProjectController {
   constructor(private projectService: ProjectService) {}
 
   @Get()
-  async findMy(): Promise<Project[]> {
+  async findMy(): Promise<WithId<Project>[]> {
     return await this.projectService.findMy();
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<Project> {
+  async findOne(@Param('id') id: string): Promise<WithId<AggregatedProject>> {
     return await this.projectService.findOne(id);
   }
 

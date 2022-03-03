@@ -1,4 +1,3 @@
-import { useRouter } from 'vue-router';
 import request from './helpers/request';
 import { useUserStore } from '~/shared/store/user';
 

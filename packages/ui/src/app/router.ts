@@ -19,9 +19,9 @@ const router = createRouter({
       component: () => import('~/features/projects/index.vue'),
     },
     {
-      path: '/app',
-      name: 'app',
-      component: () => import('~/features/app/index.vue'),
+      path: '/projects/:id',
+      name: 'project',
+      component: () => import('~/features/project/index.vue'),
     },
     {
       path: '/:pathMatch(.*)*',
