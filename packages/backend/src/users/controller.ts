@@ -1,10 +1,12 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from './create-user.dto';
 import { UserService } from './service';
 import type { User } from './types';
 import type { WithId } from 'mongodb';
 
 @Controller('users')
+@ApiTags('User')
 export class UserController {
   constructor(private usersService: UserService) {}
 
