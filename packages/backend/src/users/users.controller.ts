@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { CreateUserDto } from './create-user.dto';
-import { UserService } from './service';
-import type { User } from './types';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UserService } from './users.service';
+import type { User } from './users.types';
 import type { WithId } from 'mongodb';
 
 @Controller('users')

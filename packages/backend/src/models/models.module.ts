@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { DatabaseModule } from '../utils/db.module';
-import { ModelService } from './service';
+import { ModelService } from './models.service';
 
 @Module({
   imports: [DatabaseModule],

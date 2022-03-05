@@ -5,10 +5,10 @@ import {
   BadRequestException,
 } from '@nestjs/common';
 import { Db, ObjectId, WithId } from 'mongodb';
-import { AggregatedProject, Project } from './types';
-import { CreateProjectDto } from './create-project.dto';
-import { ModelService } from '../models/service';
-import { Model } from '../models/types';
+import { AggregatedProject, Project } from './projects.types';
+import { CreateProjectDto } from './dto/create-project.dto';
+import { ModelService } from '../models/models.service';
+import { Model } from '../models/models.types';
 
 @Injectable()
 export class ProjectService {

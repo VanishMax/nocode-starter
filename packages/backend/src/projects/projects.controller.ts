@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { CreateProjectDto } from './create-project.dto';
-import { ProjectService } from './service';
-import type { AggregatedProject, Project } from './types';
+import { CreateProjectDto } from './dto/create-project.dto';
+import { ProjectService } from './projects.service';
+import type { AggregatedProject, Project } from './projects.types';
 import type { WithId } from 'mongodb';
 
 @Controller('projects')

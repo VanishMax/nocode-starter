@@ -5,8 +5,8 @@ import {
   BadRequestException,
 } from '@nestjs/common';
 import { Db, ObjectId, WithId } from 'mongodb';
-import { Model } from './types';
-import { CreateModelDto } from './create-model.dto';
+import { Model } from './models.types';
+import { CreateModelDto } from './dto/create-model.dto';
 
 const MODEL_COLLECTION = 'models';
 

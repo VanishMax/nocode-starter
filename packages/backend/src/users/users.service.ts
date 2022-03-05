@@ -4,9 +4,9 @@ import {
   NotFoundException,
   BadRequestException,
 } from '@nestjs/common';
-import { User } from './types';
+import { User } from './users.types';
 import { Db, ObjectId, WithId } from 'mongodb';
-import { CreateUserDto } from './create-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UserService {

@@ -1,5 +1,5 @@
 import type { ObjectId } from 'mongodb';
-import type { Model } from '../models/types';
+import type { Model } from '../models/models.types';
 
 export interface Project {
   name: string;
