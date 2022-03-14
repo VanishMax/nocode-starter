@@ -9,6 +9,7 @@ import { AggregatedProject, Project } from './projects.types';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { ModelService } from '../models/models.service';
 import { Model } from '../models/models.types';
+import { User } from '../users/users.types';
 
 @Injectable()
 export class ProjectService {
@@ -17,8 +18,13 @@ export class ProjectService {
     private modelService: ModelService,
   ) {}
 
-  async findMy(): Promise<WithId<Project>[]> {
-    return await this.db.collection<Project>('projects').find().toArray();
+  async findMy(id: ObjectId): Promise<WithId<Project>[]> {
+    return await this.db
+      .collection<Project>('projects')
+      .find({
+        users: id,
+      })
+      .toArray();
   }
 
   async findOne(id: string): Promise<WithId<AggregatedProject>> {
@@ -40,11 +46,14 @@ export class ProjectService {
     };
   }
 
-  async create(body: CreateProjectDto): Promise<WithId<Project>> {
+  async create(
+    body: CreateProjectDto,
+    user: WithId<User>,
+  ): Promise<WithId<Project>> {
     const modelId = new ObjectId();
     const newProject: Project = {
       ...body,
-      users: [],
+      users: [user._id],
       online: [],
       model: modelId,
     };

@@ -1,44 +1,38 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
+import type { User, AuthResponse } from './users.types';
+import type { ObjectId, WithId } from 'mongodb';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserService } from './users.service';
-import type { User } from './users.types';
-import type { WithId } from 'mongodb';
+import { UserBody } from './users.decorator';
 
 @Controller('users')
 @ApiTags('User')
 export class UserController {
   constructor(private usersService: UserService) {}
 
-  @Get()
-  async find(): Promise<User[]> {
-    return await this.usersService.find();
+  @Get('profile')
+  @ApiBearerAuth()
+  async findMe(@UserBody() user: WithId<User>): Promise<AuthResponse> {
+    const res = await this.usersService.findOne(user._id);
+    return this.usersService.userWithJWT(res);
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<User> {
+  @ApiBearerAuth()
+  async findOne(@Param('id') id: ObjectId): Promise<User> {
     return await this.usersService.findOne(id);
   }
 
   @Post('auth')
-  async login(@Body() body: CreateUserDto): Promise<WithId<User>> {
-    const user = await this.usersService.findByUsername(body.username);
-    if (user) {
-      return user;
-    }
-
-    return this.usersService.create(body);
+  async login(@Body() body: CreateUserDto): Promise<AuthResponse> {
+    let user = await this.usersService.findByUsername(body.username);
+    if (!user) user = await this.usersService.create(body);
+    return this.usersService.userWithJWT(user);
   }
 
-  // @Put(':id')
-  // async update(
-  //   @Param('id') id: string,
-  //   @Body() body: UpdateUserDto,
-  // ): Promise<void> {
-  //   await this.usersService.update(id, body);
-  // }
-
   @Delete(':id')
+  @ApiBearerAuth()
   async delete(@Param('id') id: string): Promise<void> {
     await this.usersService.delete(id);
   }
