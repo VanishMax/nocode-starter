@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-// import { UserDto } from '../../users/dto/user.dto';
+import { BackendProjectUser, ProjectUser } from 'nocode-starter-core';
+import { UserDto } from '../../users/dto/user.dto';
 
 export enum ProjectRole {
   owner = 'owner',
@@ -7,10 +8,15 @@ export enum ProjectRole {
   reader = 'reader',
 }
 
-export class ProjectUserDto {
+export class ShortProjectUserDto implements BackendProjectUser {
   @ApiProperty()
   _id: string;
 
+  @ApiProperty()
+  role: ProjectRole;
+}
+
+export class ProjectUserDto extends UserDto implements ProjectUser {
   @ApiProperty()
   role: ProjectRole;
 }

@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ProjectUserDto } from './project-user.dto';
+import { ShortProjectUserDto } from './project-user.dto';
+import type { BackendProject } from 'nocode-starter-core';
 
-export class ShortProjectDto {
+export class ShortProjectDto implements BackendProject {
   @ApiProperty()
   _id: string;
 
@@ -9,7 +10,7 @@ export class ShortProjectDto {
   name: string;
 
   @ApiProperty()
-  users: ProjectUserDto[];
+  users: ShortProjectUserDto[];
 
   @ApiProperty()
   online: string[];

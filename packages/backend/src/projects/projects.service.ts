@@ -10,7 +10,11 @@ import { Db, ObjectId } from 'mongodb';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { ModelService } from '../models/models.service';
 import { UserDto } from '../users/dto/user.dto';
-import { ProjectRole, ProjectUserDto } from './dto/project-user.dto';
+import {
+  ProjectRole,
+  ProjectUserDto,
+  ShortProjectUserDto,
+} from './dto/project-user.dto';
 import { ProjectDto } from './dto/project.dto';
 import { ShortProjectDto } from './dto/short-project.dto';
 
@@ -47,12 +51,69 @@ export class ProjectService {
 
     const project = await this.db
       .collection<ShortProjectDto>('projects')
-      .findOne({
-        _id: new ObjectId(id) as unknown as string,
-      });
+      .aggregate<ProjectDto>([
+        {
+          $match: {
+            _id: new ObjectId(id) as unknown as string,
+          },
+        },
+        {
+          $lookup: {
+            from: 'users',
+            localField: 'users._id',
+            foreignField: '_id',
+            as: 'users',
+            let: { users: '$users' },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $in: ['$_id', '$$users._id'],
+                  },
+                },
+              },
+              {
+                $addFields: {
+                  docs: {
+                    $filter: {
+                      input: '$$users',
+                      cond: {
+                        $eq: ['$$this._id', '$_id'],
+                      },
+                    },
+                  },
+                },
+              },
+              { $unwind: '$docs' },
+              {
+                $replaceRoot: {
+                  newRoot: {
+                    $mergeObjects: [
+                      '$docs',
+                      {
+                        users: {
+                          $arrayToObject: {
+                            $filter: {
+                              input: { $objectToArray: '$$ROOT' },
+                              cond: { $ne: ['$$this.k', 'docs'] },
+                            },
+                          },
+                        },
+                      },
+                    ],
+                  },
+                },
+              },
+            ],
+          },
+        },
+      ])
+      .next();
     if (!project) throw new NotFoundException();
 
-    const model = await this.modelService.findOne(project.model);
+    const model = await this.modelService.findOne(
+      project.model as unknown as string,
+    );
     if (!model) throw new NotFoundException();
 
     return {
@@ -64,7 +125,7 @@ export class ProjectService {
   async create(body: CreateProjectDto, user: UserDto): Promise<ProjectDto> {
     const model = await this.modelService.create();
 
-    const userData: ProjectUserDto = {
+    const userData: ShortProjectUserDto = {
       _id: user._id,
       role: ProjectRole.owner,
     };
@@ -81,11 +142,7 @@ export class ProjectService {
       .collection<ShortProjectDto>('projects')
       .insertOne(newProject);
 
-    return {
-      _id: res.insertedId.toString(),
-      ...newProject,
-      model,
-    };
+    return await this.findOne(res.insertedId);
   }
 
   async updateUsers(id: string, users: ProjectUserDto[]) {

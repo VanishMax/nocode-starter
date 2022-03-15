@@ -1,4 +1,4 @@
-import { NocodeModel } from './model';
+import { Model } from './model';
 
 export interface NocodeProject {
   _id?: string,
@@ -8,7 +8,7 @@ export interface NocodeProject {
   createdAt?: Date,
   model: {
     _id?: string,
-    model: NocodeModel,
+    model: Model,
   },
 }
 

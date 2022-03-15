@@ -28,7 +28,7 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
-import type { NocodeModel, NocodeProject } from 'nocode-starter-core';
+import type { Model, NocodeProject } from 'nocode-starter-core';
 import { useRoute, useRouter } from 'vue-router';
 import Spinner from '~/shared/components/spinner/spinner.vue';
 import projectApi from '~/shared/api/project';
@@ -42,7 +42,7 @@ if (!loadedProject) {
 }
 
 const project = ref<NocodeProject>(loadedProject as NocodeProject);
-const model = reactive<NocodeModel>((loadedProject as NocodeProject).model.model);
+const model = reactive<Model>((loadedProject as NocodeProject).model.model);
 console.log(model);
 </script>
 
