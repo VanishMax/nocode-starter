@@ -4,6 +4,7 @@ import {
   Inject,
   Injectable,
   NotFoundException,
+  InternalServerErrorException,
 } from '@nestjs/common';
 import { Db, ObjectId } from 'mongodb';
 import { CreateProjectDto } from './dto/create-project.dto';
@@ -85,6 +86,59 @@ export class ProjectService {
       ...newProject,
       model,
     };
+  }
+
+  async updateUsers(id: string, users: ProjectUserDto[]) {
+    const res = await this.db.collection<ProjectDto>('projects').updateOne(
+      {
+        _id: new ObjectId(id) as unknown as string,
+      },
+      {
+        $set: {
+          users: users,
+        },
+      },
+    );
+    if (!res) throw new InternalServerErrorException();
+  }
+
+  async invite(
+    id: string,
+    users: ProjectUserDto[],
+    selfId: ObjectId,
+  ): Promise<ProjectUserDto[]> {
+    const project = await this.findOne(id);
+    const newUsers: ProjectUserDto[] = project.users;
+    users.forEach((user) => {
+      const existing = newUsers.find((ex) => ex._id === user._id);
+      if (existing) {
+        if ((existing._id as unknown as ObjectId) === selfId) {
+          throw new BadRequestException('Cannot change your own role');
+        }
+        if (!ProjectRole[user.role]) {
+          throw new BadRequestException(`No such role "${user.role}"`);
+        }
+
+        existing.role = user.role;
+      } else {
+        newUsers.push(user);
+      }
+    });
+
+    await this.updateUsers(id, newUsers);
+    return newUsers;
+  }
+
+  async removeInvite(
+    id: string,
+    users: ProjectUserDto[],
+  ): Promise<ProjectUserDto[]> {
+    const project = await this.findOne(id);
+    const newUsers: ProjectUserDto[] = project.users.filter(
+      (user) => !users.some((ex) => ex._id === user._id),
+    );
+    await this.updateUsers(id, newUsers);
+    return newUsers;
   }
 
   public async canAccess(

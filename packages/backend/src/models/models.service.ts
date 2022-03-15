@@ -25,7 +25,7 @@ export class ModelService {
     const response = await this.db
       .collection<ModelDto>(MODEL_COLLECTION)
       .findOne({
-        _id: id,
+        _id: new ObjectId(id) as unknown as string,
       });
 
     if (!response) throw new NotFoundException();
