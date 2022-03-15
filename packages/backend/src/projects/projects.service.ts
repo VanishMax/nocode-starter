@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  ForbiddenException,
   Inject,
   Injectable,
   NotFoundException,
@@ -46,7 +47,7 @@ export class ProjectService {
     const project = await this.db
       .collection<ShortProjectDto>('projects')
       .findOne({
-        _id: id,
+        _id: new ObjectId(id) as unknown as string,
       });
     if (!project) throw new NotFoundException();
 
@@ -84,5 +85,28 @@ export class ProjectService {
       ...newProject,
       model,
     };
+  }
+
+  public async canAccess(
+    roles: ProjectRole[],
+    projectId: string,
+    userId: ObjectId,
+  ): Promise<boolean> {
+    const res = await this.db.collection<ProjectDto>('projects').findOne({
+      _id: new ObjectId(projectId) as unknown as string,
+      'users._id': userId,
+    });
+
+    const role =
+      res?.users.find(
+        (user) =>
+          (user._id as unknown as ObjectId).toString() === userId.toString(),
+      )?.role || null;
+
+    if (!role || !roles.includes(role)) {
+      throw new ForbiddenException("You don't have enough permissions");
+    }
+
+    if (role) return true;
   }
 }
