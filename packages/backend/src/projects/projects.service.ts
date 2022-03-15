@@ -17,6 +17,9 @@ import {
 } from './dto/project-user.dto';
 import { ProjectDto } from './dto/project.dto';
 import { ShortProjectDto } from './dto/short-project.dto';
+import joinWithData from '../utils/join-with-data';
+
+const PROJECTS_COLLECTION = 'projects';
 
 @Injectable()
 export class ProjectService {
@@ -27,7 +30,7 @@ export class ProjectService {
 
   async findMy(id: string): Promise<ProjectDto[]> {
     return await this.db
-      .collection<ShortProjectDto>('projects')
+      .collection<ShortProjectDto>(PROJECTS_COLLECTION)
       .aggregate<ProjectDto>([
         {
           $match: {
@@ -50,64 +53,8 @@ export class ProjectService {
     if (!ObjectId.isValid(id)) throw new BadRequestException();
 
     const project = await this.db
-      .collection<ShortProjectDto>('projects')
-      .aggregate<ProjectDto>([
-        {
-          $match: {
-            _id: new ObjectId(id) as unknown as string,
-          },
-        },
-        {
-          $lookup: {
-            from: 'users',
-            localField: 'users._id',
-            foreignField: '_id',
-            as: 'users',
-            let: { users: '$users' },
-            pipeline: [
-              {
-                $match: {
-                  $expr: {
-                    $in: ['$_id', '$$users._id'],
-                  },
-                },
-              },
-              {
-                $addFields: {
-                  docs: {
-                    $filter: {
-                      input: '$$users',
-                      cond: {
-                        $eq: ['$$this._id', '$_id'],
-                      },
-                    },
-                  },
-                },
-              },
-              { $unwind: '$docs' },
-              {
-                $replaceRoot: {
-                  newRoot: {
-                    $mergeObjects: [
-                      '$docs',
-                      {
-                        users: {
-                          $arrayToObject: {
-                            $filter: {
-                              input: { $objectToArray: '$$ROOT' },
-                              cond: { $ne: ['$$this.k', 'docs'] },
-                            },
-                          },
-                        },
-                      },
-                    ],
-                  },
-                },
-              },
-            ],
-          },
-        },
-      ])
+      .collection<ShortProjectDto>(PROJECTS_COLLECTION)
+      .aggregate<ProjectDto>(joinWithData(id, 'users', 'users'))
       .next();
     if (!project) throw new NotFoundException();
 
@@ -126,7 +73,7 @@ export class ProjectService {
     const model = await this.modelService.create();
 
     const userData: ShortProjectUserDto = {
-      _id: user._id,
+      _id: new ObjectId(user._id) as unknown as string,
       role: ProjectRole.owner,
     };
 
@@ -139,23 +86,25 @@ export class ProjectService {
     };
 
     const res = await this.db
-      .collection<ShortProjectDto>('projects')
+      .collection<ShortProjectDto>(PROJECTS_COLLECTION)
       .insertOne(newProject);
 
     return await this.findOne(res.insertedId);
   }
 
-  async updateUsers(id: string, users: ProjectUserDto[]) {
-    const res = await this.db.collection<ProjectDto>('projects').updateOne(
-      {
-        _id: new ObjectId(id) as unknown as string,
-      },
-      {
-        $set: {
-          users: users,
+  private async updateUsers(id: string, users: ProjectUserDto[]) {
+    const res = await this.db
+      .collection<ProjectDto>(PROJECTS_COLLECTION)
+      .updateOne(
+        {
+          _id: new ObjectId(id) as unknown as string,
         },
-      },
-    );
+        {
+          $set: {
+            users: users,
+          },
+        },
+      );
     if (!res) throw new InternalServerErrorException();
   }
 
@@ -178,7 +127,10 @@ export class ProjectService {
 
         existing.role = user.role;
       } else {
-        newUsers.push(user);
+        newUsers.push({
+          ...user,
+          _id: new ObjectId(user._id) as unknown as string,
+        });
       }
     });
 
@@ -198,15 +150,33 @@ export class ProjectService {
     return newUsers;
   }
 
+  async delete(id: string): Promise<void> {
+    if (!ObjectId.isValid(id)) {
+      throw new BadRequestException();
+    }
+
+    const response = await this.db
+      .collection<ProjectDto>(PROJECTS_COLLECTION)
+      .deleteOne({
+        _id: new ObjectId(id) as unknown as string,
+      });
+
+    if (response.deletedCount === 0) {
+      throw new NotFoundException();
+    }
+  }
+
   public async canAccess(
     roles: ProjectRole[],
     projectId: string,
     userId: ObjectId,
   ): Promise<boolean> {
-    const res = await this.db.collection<ProjectDto>('projects').findOne({
-      _id: new ObjectId(projectId) as unknown as string,
-      'users._id': userId,
-    });
+    const res = await this.db
+      .collection<ProjectDto>(PROJECTS_COLLECTION)
+      .findOne({
+        _id: new ObjectId(projectId) as unknown as string,
+        'users._id': userId,
+      });
 
     const role =
       res?.users.find(

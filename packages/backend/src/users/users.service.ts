@@ -12,6 +12,8 @@ import constants from '../utils/constants';
 import { AuthResponseDto } from './dto/auth-response.dto';
 import { UserDto } from './dto/user.dto';
 
+const USERS_COLLECTION = 'users';
+
 @Injectable()
 export class UserService {
   constructor(
@@ -21,7 +23,7 @@ export class UserService {
   ) {}
 
   async find(): Promise<UserDto[]> {
-    return await this.db.collection<UserDto>('users').find().toArray();
+    return await this.db.collection<UserDto>(USERS_COLLECTION).find().toArray();
   }
 
   async findOne(id: string): Promise<UserDto> {
@@ -29,9 +31,11 @@ export class UserService {
       throw new BadRequestException();
     }
 
-    const response = await this.db.collection<UserDto>('users').findOne({
-      _id: new ObjectId(id) as unknown as string,
-    });
+    const response = await this.db
+      .collection<UserDto>(USERS_COLLECTION)
+      .findOne({
+        _id: new ObjectId(id) as unknown as string,
+      });
 
     if (!response) throw new NotFoundException();
     return response;
@@ -46,7 +50,7 @@ export class UserService {
       throw new BadRequestException();
     }
 
-    const res = await this.db.collection<UserDto>('users').findOne({
+    const res = await this.db.collection<UserDto>(USERS_COLLECTION).findOne({
       username: username,
     });
 
@@ -56,7 +60,7 @@ export class UserService {
 
   async create(body: CreateUserDto): Promise<UserDto> {
     const res = await this.db
-      .collection<CreateUserDto>('users')
+      .collection<CreateUserDto>(USERS_COLLECTION)
       .insertOne(body);
     return { ...body, _id: res.insertedId.toString() };
   }
@@ -66,9 +70,11 @@ export class UserService {
       throw new BadRequestException();
     }
 
-    const response = await this.db.collection<UserDto>('users').deleteOne({
-      _id: id,
-    });
+    const response = await this.db
+      .collection<UserDto>(USERS_COLLECTION)
+      .deleteOne({
+        _id: new ObjectId(id) as unknown as string,
+      });
 
     if (response.deletedCount === 0) {
       throw new NotFoundException();

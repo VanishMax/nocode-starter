@@ -27,6 +27,7 @@
     "class-validator": "^0.13.2",
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
+    "lodash.set": "^4.3.2",
     "mongodb": "^4.4.0",
     "passport-jwt": "^4.0.0",
     "reflect-metadata": "^0.1.13",

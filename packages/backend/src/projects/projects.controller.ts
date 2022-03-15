@@ -7,7 +7,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { ProjectService } from './projects.service';
 import { UserBody } from '../users/users.decorator';
@@ -16,13 +16,17 @@ import { UserDto } from '../users/dto/user.dto';
 import { Auth } from '../users/auth.decorator';
 import { ProjectRoles } from './project-roles.decorator';
 import { ProjectRole, ProjectUserDto } from './dto/project-user.dto';
-import { ModelDataDto } from '../models/dto/model-data.dto';
 import { ObjectId } from 'mongodb';
+import { ModelEditDto } from '../models/dto/edit-model.dto';
+import { ModelService } from '../models/models.service';
 
 @Controller('projects')
 @ApiTags('Project')
 export class ProjectController {
-  constructor(private projectService: ProjectService) {}
+  constructor(
+    private projectService: ProjectService,
+    private modelService: ModelService,
+  ) {}
 
   @Get()
   @Auth()
@@ -67,7 +71,18 @@ export class ProjectController {
 
   @Put(':id')
   @ProjectRoles(ProjectRole.owner, ProjectRole.editor)
-  async changeModelField(@Param('id') id: string, @Body() body: ModelDataDto) {
-    console.log('here, changing', id, body);
+  @ApiOperation({
+    description:
+      'Main function for editing the model. It accept the object of type `{ [path]: value }`, where `path` is a path to the model property that needs to be changed, and `value` is any value suitable for this property. For example, `{ color: "black", "page.[0].name": "one"}`',
+  })
+  async changeModelField(@Param('id') id: string, @Body() body: ModelEditDto) {
+    const project = await this.projectService.findOne(id);
+    return await this.modelService.edit(project, body);
+  }
+
+  @Delete(':id')
+  @ProjectRoles(ProjectRole.owner)
+  async delete(@Param('id') id: string): Promise<void> {
+    await this.projectService.delete(id);
   }
 }

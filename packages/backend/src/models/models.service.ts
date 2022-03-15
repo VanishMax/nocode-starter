@@ -7,6 +7,9 @@ import {
 import { Db, ObjectId } from 'mongodb';
 import { ModelDto } from './dto/model.dto';
 import { modelData } from './model.data';
+import { ModelEditDto } from './dto/edit-model.dto';
+import { ProjectDto } from '../projects/dto/project.dto';
+import * as set from 'lodash.set';
 
 const MODEL_COLLECTION = 'models';
 
@@ -38,5 +41,16 @@ export class ModelService {
       ...modelData,
     });
     return { _id: res.insertedId, ...modelData };
+  }
+
+  async edit(project: ProjectDto, data: ModelEditDto): Promise<ModelDto> {
+    const model = project.model;
+    const filter = { _id: new ObjectId(model._id) as unknown as string };
+    await this.db.collection<ModelDto>(MODEL_COLLECTION).updateOne(filter, {
+      $set: data,
+    });
+
+    Object.entries(data).forEach(([key, val]) => set(model, key, val));
+    return project;
   }
 }
