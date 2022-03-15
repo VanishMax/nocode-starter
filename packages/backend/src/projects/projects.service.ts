@@ -1,15 +1,16 @@
 import {
-  Injectable,
-  Inject,
-  NotFoundException,
   BadRequestException,
+  Inject,
+  Injectable,
+  NotFoundException,
 } from '@nestjs/common';
-import { Db, ObjectId, WithId } from 'mongodb';
-import { AggregatedProject, Project } from './projects.types';
+import { Db, ObjectId } from 'mongodb';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { ModelService } from '../models/models.service';
-import { Model } from '../models/models.types';
-import { User } from '../users/users.types';
+import { UserDto } from '../users/dto/user.dto';
+import { ProjectRole, ProjectUserDto } from './dto/project-user.dto';
+import { ProjectDto } from './dto/project.dto';
+import { ShortProjectDto } from './dto/short-project.dto';
 
 @Injectable()
 export class ProjectService {
@@ -18,50 +19,70 @@ export class ProjectService {
     private modelService: ModelService,
   ) {}
 
-  async findMy(id: ObjectId): Promise<WithId<Project>[]> {
+  async findMy(id: string): Promise<ProjectDto[]> {
     return await this.db
-      .collection<Project>('projects')
-      .find({
-        users: id,
-      })
+      .collection<ShortProjectDto>('projects')
+      .aggregate<ProjectDto>([
+        {
+          $match: {
+            'users._id': id,
+          },
+        },
+        {
+          $lookup: {
+            from: 'models',
+            localField: 'model',
+            foreignField: '_id',
+            as: 'model',
+          },
+        },
+      ])
       .toArray();
   }
 
-  async findOne(id: string): Promise<WithId<AggregatedProject>> {
+  async findOne(id: string): Promise<ProjectDto> {
     if (!ObjectId.isValid(id)) throw new BadRequestException();
 
-    const response = await this.db.collection<Project>('projects').findOne({
-      _id: new ObjectId(id),
-    });
-    if (!response) throw new NotFoundException();
+    const project = await this.db
+      .collection<ShortProjectDto>('projects')
+      .findOne({
+        _id: id,
+      });
+    if (!project) throw new NotFoundException();
 
-    const model = await this.db.collection<Model>('models').findOne({
-      _id: new ObjectId(response.model),
-    });
+    const model = await this.modelService.findOne(project.model);
     if (!model) throw new NotFoundException();
 
     return {
-      ...response,
-      model: model,
+      ...project,
+      model,
     };
   }
 
-  async create(
-    body: CreateProjectDto,
-    user: WithId<User>,
-  ): Promise<WithId<Project>> {
-    const modelId = new ObjectId();
-    const newProject: Project = {
-      ...body,
-      users: [user._id],
-      online: [],
-      model: modelId,
+  async create(body: CreateProjectDto, user: UserDto): Promise<ProjectDto> {
+    const model = await this.modelService.create();
+
+    const userData: ProjectUserDto = {
+      _id: user._id,
+      role: ProjectRole.owner,
     };
 
-    await this.modelService.create({ model: {} }, modelId);
+    const newProject: ShortProjectDto = {
+      _id: new ObjectId() as unknown as string,
+      ...body,
+      users: [userData],
+      online: [],
+      model: model._id,
+    };
+
     const res = await this.db
-      .collection<Project>('projects')
+      .collection<ShortProjectDto>('projects')
       .insertOne(newProject);
-    return { ...newProject, _id: res.insertedId };
+
+    return {
+      _id: res.insertedId.toString(),
+      ...newProject,
+      model,
+    };
   }
 }

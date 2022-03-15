@@ -5,11 +5,12 @@ import {
   BadRequestException,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import type { User } from './users.types';
-import { Db, ObjectId, WithId } from 'mongodb';
+import { Db, ObjectId } from 'mongodb';
 import { CreateUserDto } from './dto/create-user.dto';
 import { sign } from 'jsonwebtoken';
 import constants from '../utils/constants';
+import { AuthResponseDto } from './dto/auth-response.dto';
+import { UserDto } from './dto/user.dto';
 
 @Injectable()
 export class UserService {
@@ -19,27 +20,24 @@ export class UserService {
     private readonly configService: ConfigService,
   ) {}
 
-  async find(): Promise<WithId<User>[]> {
-    return await this.db.collection<User>('users').find().toArray();
+  async find(): Promise<UserDto[]> {
+    return await this.db.collection<UserDto>('users').find().toArray();
   }
 
-  async findOne(id: ObjectId): Promise<WithId<User>> {
+  async findOne(id: string): Promise<UserDto> {
     if (!ObjectId.isValid(id)) {
       throw new BadRequestException();
     }
 
-    const response = await this.db.collection<User>('users').findOne({
-      _id: new ObjectId(id),
+    const response = await this.db.collection<UserDto>('users').findOne({
+      _id: new ObjectId(id) as unknown as string,
     });
 
-    if (!response) {
-      throw new NotFoundException();
-    }
-
+    if (!response) throw new NotFoundException();
     return response;
   }
 
-  async findByUsername(username: string): Promise<WithId<User> | null> {
+  async findByUsername(username: string): Promise<UserDto | null> {
     if (
       !username ||
       typeof username !== 'string' ||
@@ -48,20 +46,19 @@ export class UserService {
       throw new BadRequestException();
     }
 
-    const res = await this.db.collection<User>('users').findOne({
+    const res = await this.db.collection<UserDto>('users').findOne({
       username: username,
     });
 
-    if (!res) {
-      return null;
-    }
-
+    if (!res) return null;
     return res;
   }
 
-  async create(body: CreateUserDto): Promise<WithId<User>> {
-    const res = await this.db.collection<User>('users').insertOne(body);
-    return { ...body, _id: res.insertedId };
+  async create(body: CreateUserDto): Promise<UserDto> {
+    const res = await this.db
+      .collection<CreateUserDto>('users')
+      .insertOne(body);
+    return { ...body, _id: res.insertedId.toString() };
   }
 
   async delete(id: string): Promise<void> {
@@ -69,8 +66,8 @@ export class UserService {
       throw new BadRequestException();
     }
 
-    const response = await this.db.collection<User>('users').deleteOne({
-      _id: new ObjectId(id),
+    const response = await this.db.collection<UserDto>('users').deleteOne({
+      _id: id,
     });
 
     if (response.deletedCount === 0) {
@@ -78,7 +75,7 @@ export class UserService {
     }
   }
 
-  public userWithJWT(user: WithId<User>) {
+  public userWithJWT(user: UserDto): AuthResponseDto {
     const today = new Date();
     const exp = new Date(today);
     exp.setDate(today.getDate() + 60);

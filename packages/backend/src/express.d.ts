@@ -1,8 +1,7 @@
 declare namespace Express {
-  import type { WithId } from 'mongodb';
-  import type { User } from './users/users.types';
+  import type { UserDto } from './users/dto/user.dto';
 
   export interface Request {
-    user: WithId<User>;
+    user: UserDto;
   }
 }

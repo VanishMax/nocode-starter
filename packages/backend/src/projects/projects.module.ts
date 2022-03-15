@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { DatabaseModule } from '../utils/db.module';
 import { ProjectService } from './projects.service';
 import { ProjectController } from './projects.controller';
@@ -14,12 +14,6 @@ import { ConfigModule } from '@nestjs/config';
 })
 export class ProjectsModule {
   public configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(AuthMiddleware)
-      .exclude({
-        path: 'users/auth',
-        method: RequestMethod.POST,
-      })
-      .forRoutes(ProjectController);
+    consumer.apply(AuthMiddleware).forRoutes(ProjectController);
   }
 }

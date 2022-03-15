@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { DatabaseModule } from '../utils/db.module';
 import { UserService } from './users.service';
 import { UserController } from './users.controller';
@@ -12,6 +12,12 @@ import { ConfigModule } from '@nestjs/config';
 })
 export class UsersModule {
   public configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthMiddleware).forRoutes(UserController);
+    consumer
+      .apply(AuthMiddleware)
+      .exclude({
+        path: 'api/users/auth',
+        method: RequestMethod.POST,
+      })
+      .forRoutes(UserController);
   }
 }

@@ -4,9 +4,9 @@ import {
   NotFoundException,
   BadRequestException,
 } from '@nestjs/common';
-import { Db, ObjectId, WithId } from 'mongodb';
-import { Model } from './models.types';
-import { CreateModelDto } from './dto/create-model.dto';
+import { Db, ObjectId } from 'mongodb';
+import { ModelDto } from './dto/model.dto';
+import { modelData } from './model.data';
 
 const MODEL_COLLECTION = 'models';
 
@@ -17,36 +17,26 @@ export class ModelService {
     private db: Db,
   ) {}
 
-  async findOne(id: string): Promise<WithId<Model>> {
+  async findOne(id: string): Promise<ModelDto> {
     if (!ObjectId.isValid(id)) {
       throw new BadRequestException();
     }
 
-    const response = await this.db.collection<Model>(MODEL_COLLECTION).findOne({
-      _id: new ObjectId(id),
-    });
+    const response = await this.db
+      .collection<ModelDto>(MODEL_COLLECTION)
+      .findOne({
+        _id: id,
+      });
 
-    if (!response) {
-      throw new NotFoundException();
-    }
-
+    if (!response) throw new NotFoundException();
     return response;
   }
 
-  async create(
-    { model }: CreateModelDto,
-    id?: ObjectId,
-  ): Promise<WithId<Model>> {
-    if (!model) {
-      throw new BadRequestException();
-    }
-
-    const data: { model: CreateModelDto['model']; _id?: ObjectId } = { model };
-    if (id) data._id = id;
-
-    const res = await this.db
-      .collection<Model>(MODEL_COLLECTION)
-      .insertOne(data);
-    return { model, _id: res.insertedId };
+  async create(): Promise<ModelDto> {
+    const res = await this.db.collection<ModelDto>(MODEL_COLLECTION).insertOne({
+      _id: new ObjectId() as unknown as string,
+      ...modelData,
+    });
+    return { _id: res.insertedId, ...modelData };
   }
 }

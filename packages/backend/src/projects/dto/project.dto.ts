@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { ModelDto } from '../../models/dto/model.dto';
+import { ProjectUserDto } from './project-user.dto';
 
 export class ProjectDto {
   @ApiProperty()
@@ -9,7 +10,7 @@ export class ProjectDto {
   name: string;
 
   @ApiProperty()
-  users: string[];
+  users: ProjectUserDto[];
 
   @ApiProperty()
   online: string[];
