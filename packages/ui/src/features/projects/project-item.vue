@@ -1,14 +1,15 @@
 <template>
-  <div
-    class="block mt-8 w-full max-w-3xl mx-auto h-32 flex items-center justify-center
-        rounded border border-indigo-500 bg-indigo-600"
+  <router-link
+    :to="{ name: 'project', params: { id: project._id } }"
+    class="block mt-8 w-full max-w-3xl mx-auto h-32 p-4 rounded border border-2
+     border-indigo-500 bg-transparent dark:bg-indigo-600"
   >
-    <p class="">{{ project.name }}</p>
-    <div>
-      Created: <time>{{ project.createdAt }}</time>
-      Last accessed: <time>{{ project.accessedAt }}</time>
+    <p class="m-0 text-xl font-bold">{{ project.name }}</p>
+    <div class="mt-8">
+      <template v-if="project.createdAt">Created: <time>{{ project.createdAt }}</time></template>
+      <template v-if="project.accessedAt">Last accessed: <time>{{ project.accessedAt }}</time></template>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script setup lang="ts">

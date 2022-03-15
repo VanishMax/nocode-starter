@@ -1,5 +1,5 @@
 <template>
-  <button class="p-1" @click="toggleDarkMode">
+  <button class="p-1 w-8" @click="toggleDarkMode">
     <i v-if="darkMode" class="gg-sun scale-150 text-gray-900 dark:text-gray-50" />
     <i v-else class="gg-moon scale-150 text-gray-900 dark:text-gray-50" />
   </button>

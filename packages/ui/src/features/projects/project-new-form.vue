@@ -32,19 +32,20 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
 import type { NocodeProject } from 'nocode-starter-core';
+import projectApi from '~/shared/api/project';
 
-defineEmits(['cancel']);
+const emit = defineEmits(['cancel', 'created']);
 
 const formData = reactive<NocodeProject>({
   name: '',
 });
 
-const submit = () => {
+const submit = async () => {
   const data: NocodeProject = {
     name: formData.name,
-    createdAt: new Date(),
-    accessedAt: new Date(),
   };
-  console.log(data);
+  const res = await projectApi.create(data);
+  emit('created', res);
+  console.log(res);
 };
 </script>

@@ -6,6 +6,7 @@
     "apps/*",
     "packages/*"
   ],
+  "packageManager": "pnpm@6.31.0",
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
@@ -15,25 +16,6 @@
   "devDependencies": {
     "prettier": "^2.5.1",
     "turbo": "latest"
-  },
-  "turbo": {
-    "pipeline": {
-      "build": {
-        "dependsOn": [
-          "^build"
-        ],
-        "outputs": [
-          "dist/**",
-          ".next/**"
-        ]
-      },
-      "lint": {
-        "outputs": []
-      },
-      "dev": {
-        "cache": false
-      }
-    }
   },
   "engines": {
     "npm": ">=7.0.0",

@@ -1,3 +1,5 @@
-export interface NocodeModel {
-  project_name: string,
+export interface Model {
+  _id: string,
+  color?: string,
+  project_name?: string,
 }
