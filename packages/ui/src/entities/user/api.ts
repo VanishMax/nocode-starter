@@ -19,7 +19,15 @@ const userApi = {
 
     return res;
   },
-  logout: () => {},
+  profile: () => {
+    const store = useUserStore();
+    return request<AuthResponse>('/users/profile', {
+      method: 'GET',
+      headers: {
+        authorization: `Bearer ${store.token}`,
+      },
+    });
+  },
 };
 
 export default userApi;

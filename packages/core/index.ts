@@ -3,7 +3,6 @@ export type {
 } from './types/model';
 
 export {
-  type NocodeProject,
   type NocodeConfig,
   NocodeLanguage,
 } from './types/config';
@@ -14,9 +13,13 @@ export type {
 } from './types/user';
 
 export type {
-  ProjectRole,
   BackendProjectUser,
   BackendProject,
   ProjectUser,
+  ShortProjectUser,
   Project,
+} from './types/project';
+
+export {
+  ProjectRole,
 } from './types/project';

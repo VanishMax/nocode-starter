@@ -24,6 +24,11 @@ export interface ProjectUser extends User {
   role: ProjectRole,
 }
 
+export interface ShortProjectUser {
+  _id: string,
+  role: ProjectRole,
+}
+
 export interface Project {
   _id: string;
   name: string;
