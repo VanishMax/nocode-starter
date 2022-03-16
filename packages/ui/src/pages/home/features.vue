@@ -40,5 +40,5 @@
 </template>
 
 <script lang="ts" setup>
-import FeatureBlock from '~/features/home/feature-block.vue';
+import FeatureBlock from '~/pages/home/feature-block.vue';
 </script>

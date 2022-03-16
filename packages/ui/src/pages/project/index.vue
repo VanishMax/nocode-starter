@@ -30,8 +30,8 @@
 import { reactive, ref } from 'vue';
 import type { Model, NocodeProject } from 'nocode-starter-core';
 import { useRoute, useRouter } from 'vue-router';
-import Spinner from '~/shared/components/spinner/spinner.vue';
-import projectApi from '~/shared/api/project';
+import Spinner from '~/shared/ui/spinner/spinner.vue';
+import projectApi from '~/entities/project/api';
 
 const route = useRoute();
 const router = useRouter();

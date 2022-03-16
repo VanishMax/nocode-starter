@@ -4,9 +4,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import nocodeConfig from '~/shared/utils/config';
+import { useConfigStore } from '~/features/config';
 
 const configLoaded = ref(false);
-const config = await nocodeConfig.setup();
+const config = useConfigStore();
+await config.setup();
 configLoaded.value = true;
 </script>

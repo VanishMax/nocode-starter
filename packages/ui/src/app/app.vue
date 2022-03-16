@@ -13,5 +13,5 @@
 
 <script setup lang="ts">
 import ConfigLoader from '~/app/config-loader.vue';
-import Spinner from '~/shared/components/spinner/spinner.vue';
+import Spinner from '~/shared/ui/spinner/spinner.vue';
 </script>

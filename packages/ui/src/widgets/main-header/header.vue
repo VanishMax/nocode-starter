@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import DarkModeToggle from '~/shared/components/dark-mode-toggle/dark-mode-toggle.vue';
+import { DarkModeToggle } from '~/features/config';
 
 defineProps({
   auth: {

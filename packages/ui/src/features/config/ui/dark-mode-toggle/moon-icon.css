@@ -8,7 +8,7 @@
 .gg-moon {
   overflow: hidden;
   position: relative;
-  transform: rotate(-135deg) scale(var(--ggs,1));
+  transform: rotate(-135deg) scale(var(--ggs,1.25));
   width: 20px;
   height: 20px;
   border: 2px solid;

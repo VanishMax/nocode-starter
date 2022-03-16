@@ -6,26 +6,26 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('~/features/home/index.vue'),
+      component: () => import('~/pages/home/index.vue'),
     },
     {
       path: '/auth',
       name: 'auth',
-      component: () => import('~/features/auth/index.vue'),
+      component: () => import('~/pages/auth.vue'),
     },
     {
       path: '/projects',
       name: 'projects',
-      component: () => import('~/features/projects/index.vue'),
+      component: () => import('~/pages/projects.vue'),
     },
     {
       path: '/projects/:id',
       name: 'project',
-      component: () => import('~/features/project/index.vue'),
+      component: () => import('~/pages/project/index.vue'),
     },
     {
       path: '/:pathMatch(.*)*',
-      component: () => import('~/features/404/index.vue'),
+      component: () => import('~/pages/404.vue'),
     },
   ],
 });

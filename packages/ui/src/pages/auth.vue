@@ -31,8 +31,8 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import Header from '~/shared/components/header/header.vue';
-import userApi from '~/shared/api/user';
+import Header from '~/widgets/main-header/header.vue';
+import { userApi } from '~/entities/user';
 
 const router = useRouter();
 const loading = ref(false);

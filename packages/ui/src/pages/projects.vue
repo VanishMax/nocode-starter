@@ -16,19 +16,18 @@
       </template>
     </suspense>
 
-    <ProjectNewItem v-if="!newItemFormOpen" @click="newItemFormOpen = true" />
-    <ProjectNewForm v-else @cancel="newItemFormOpen = false" @created="updateProjects" />
+    <NewProjectItem v-if="!newItemFormOpen" @click="newItemFormOpen = true" />
+    <NewProjectForm v-else @cancel="newItemFormOpen = false" @created="updateProjects" />
   </section>
 </template>
 
 <script setup lang="ts" async>
 import { ref } from 'vue';
 import type { NocodeProject } from 'nocode-starter-core';
-import Header from '~/shared/components/header/header.vue';
-import ProjectNewItem from '~/features/projects/project-new-item.vue';
-import ProjectItem from '~/features/projects/project-item.vue';
-import ProjectNewForm from '~/features/projects/project-new-form.vue';
-import projectApi from '~/shared/api/project';
+import Header from '~/widgets/main-header/header.vue';
+import {
+  ProjectItem, NewProjectForm, NewProjectItem, projectApi,
+} from '~/entities/project';
 
 const projects = ref<NocodeProject[]>((await projectApi.list())?.data || []);
 

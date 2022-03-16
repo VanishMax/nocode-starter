@@ -1,5 +1,5 @@
 import type { NocodeProject } from 'nocode-starter-core';
-import request from './helpers/request';
+import request from '../../shared/api/request';
 
 const projectApi = {
   list: async () => request<NocodeProject[]>('/projects/', {

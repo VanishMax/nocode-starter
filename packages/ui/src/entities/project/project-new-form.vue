@@ -32,7 +32,7 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
 import type { NocodeProject } from 'nocode-starter-core';
-import projectApi from '~/shared/api/project';
+import projectApi from '~/entities/project/api';
 
 const emit = defineEmits(['cancel', 'created']);
 

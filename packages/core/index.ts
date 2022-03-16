@@ -2,12 +2,16 @@ export type {
   Model,
 } from './types/model';
 
-export type {
-  NocodeConfig,
-  NocodeProject,
+export {
+  type NocodeProject,
+  type NocodeConfig,
+  NocodeLanguage,
 } from './types/config';
 
-export type { User } from './types/user';
+export type {
+  User,
+  AuthResponse,
+} from './types/user';
 
 export type {
   ProjectRole,
