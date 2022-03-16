@@ -1,25 +1,47 @@
 <template>
-  <router-link
-    :to="{ name: 'project', params: { id: project._id } }"
-    class="block mt-8 w-full max-w-3xl mx-auto h-32 p-4 rounded border border-2
-     border-indigo-500 bg-transparent dark:bg-indigo-600"
+  <div
+    class="relative block mt-8 w-full max-w-3xl mx-auto px-4 py-2 rounded border border-2
+     border-indigo-500 bg-transparent dark:bg-indigo-600 flex items-center"
   >
-    <p class="m-0 text-xl font-bold">{{ project.name }}</p>
-    <div class="mt-8">
-      <template v-if="project.createdAt">Created: <time>{{ project.createdAt }}</time></template>
-      <template v-if="project.accessedAt">Last accessed: <time>{{ project.accessedAt }}</time></template>
+    <router-link
+      class="block grow m-0 text-xl font-bold dark:text-white"
+      :to="{ name: 'project', params: { id: project._id } }"
+    >
+      {{ project.name }}
+    </router-link>
+    <div class="flex mr-6">
+      <div
+        v-for="user in project.users"
+        :key="user._id"
+        class="h-6 w-6 -ml-0.5 rounded-full border border-white bg-gray-200 text-center"
+        :title="user.username"
+      >
+        {{ user.username?.charAt(0) || '' }}
+      </div>
     </div>
-  </router-link>
+
+    <Trashbin @click="removeProject" />
+  </div>
 </template>
 
 <script setup lang="ts">
 import { PropType } from 'vue';
-import type { NocodeProject } from 'nocode-starter-core';
+import type { Project } from 'nocode-starter-core';
+import Trashbin from '~/shared/ui/trashbin/trashbin.vue';
+import { projectApi } from '~/entities/project/index';
 
-defineProps({
+const props = defineProps({
   project: {
-    type: Object as PropType<NocodeProject>,
+    type: Object as PropType<Project>,
     required: true,
   },
 });
+
+const emit = defineEmits(['deleted']);
+
+const removeProject = async () => {
+  const res = await projectApi.delete(props.project._id);
+  if (res.error) return;
+  emit('deleted');
+};
 </script>

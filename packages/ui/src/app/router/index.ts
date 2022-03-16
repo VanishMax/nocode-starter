@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import authGuard from '~/app/router/auth.guard';
 
-const router = createRouter({
+const index = createRouter({
   history: createWebHistory(),
   routes: [
     {
@@ -17,11 +18,13 @@ const router = createRouter({
       path: '/projects',
       name: 'projects',
       component: () => import('~/pages/projects.vue'),
+      beforeEnter: [authGuard],
     },
     {
       path: '/projects/:id',
       name: 'project',
       component: () => import('~/pages/project/index.vue'),
+      beforeEnter: [authGuard],
     },
     {
       path: '/:pathMatch(.*)*',
@@ -30,4 +33,4 @@ const router = createRouter({
   ],
 });
 
-export default router;
+export default index;

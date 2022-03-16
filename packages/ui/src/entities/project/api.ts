@@ -1,34 +1,37 @@
 import type { Project, Model, ShortProjectUser } from 'nocode-starter-core';
 import request from '~/shared/api/request';
+import { useUserStore } from '~/entities/user';
+
+const getHeaders = () => ({
+  'Content-Type': 'application/json',
+  authorization: `Bearer ${(() => useUserStore().token)()}`,
+});
 
 const projectApi = {
   list: async () => request<Project[]>('/projects', {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    headers: getHeaders(),
   }),
   single: async (id: string) => request<Project>(`/projects/${id}`, {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    headers: getHeaders(),
   }),
   create: async (data: { name: string }) => request<Project>('/projects/', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers: getHeaders(),
     body: JSON.stringify({
       name: data.name,
     }),
   }),
   delete: async (id: string) => request<Project>(`/projects/${id}`, {
     method: 'DELETE',
+    headers: getHeaders(),
   }),
   invite: async (id: string, data: ShortProjectUser[]) => request<ShortProjectUser[]>(
     `/projects/${id}/invite`,
     {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: getHeaders(),
       body: JSON.stringify(data),
     },
   ),
@@ -36,9 +39,7 @@ const projectApi = {
     `/projects/${id}/invite`,
     {
       method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: getHeaders(),
       body: JSON.stringify(data),
     },
   ),
@@ -46,9 +47,7 @@ const projectApi = {
     `/projects/${id}`,
     {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: getHeaders(),
       body: JSON.stringify(data),
     },
   ),

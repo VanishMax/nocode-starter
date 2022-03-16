@@ -45,6 +45,7 @@ export class ProjectService {
             as: 'model',
           },
         },
+        ...joinWithData('users', 'users'),
       ])
       .toArray();
   }
@@ -54,7 +55,14 @@ export class ProjectService {
 
     const project = await this.db
       .collection<ShortProjectDto>(PROJECTS_COLLECTION)
-      .aggregate<ProjectDto>(joinWithData(id, 'users', 'users'))
+      .aggregate<ProjectDto>([
+        {
+          $match: {
+            _id: new ObjectId(id) as unknown as string,
+          },
+        },
+        ...joinWithData('users', 'users'),
+      ])
       .next();
     if (!project) throw new NotFoundException();
 

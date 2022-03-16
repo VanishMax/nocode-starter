@@ -6,7 +6,13 @@ type DataOrError<DATA> = { data: DATA, error?: never } | { error: unknown, data?
 const request = async <DATA>(url: string, options: RequestInit): Promise<DataOrError<DATA>> => {
   try {
     const res = await fetch(API_URL + url, options);
-    const data = await res.json();
+    let data;
+    try {
+      data = await res.json();
+    } catch (_) {
+      data = {};
+    }
+
     if ((data as {statusCode: number })?.statusCode >= 400) {
       return { error: data };
     }

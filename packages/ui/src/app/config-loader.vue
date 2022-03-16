@@ -7,7 +7,9 @@ import { ref } from 'vue';
 import { useConfigStore } from '~/features/config';
 
 const configLoaded = ref(false);
-const config = useConfigStore();
-await config.setup();
+
+const configStore = useConfigStore();
+await configStore.setup();
+
 configLoaded.value = true;
 </script>

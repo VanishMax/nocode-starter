@@ -1,7 +1,7 @@
 <template>
   <suspense>
     <template #default>
-      <section class="app-main">
+      <section v-if="project" class="app-main">
         <aside class="sidebar left">
           <form>
             <input v-model="model.project_name" type="text" placeholder="Application name">
@@ -28,7 +28,7 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
-import type { Model, NocodeProject } from 'nocode-starter-core';
+import type { Model, Project } from 'nocode-starter-core';
 import { useRoute, useRouter } from 'vue-router';
 import Spinner from '~/shared/ui/spinner/spinner.vue';
 import projectApi from '~/entities/project/api';
@@ -36,14 +36,13 @@ import projectApi from '~/entities/project/api';
 const route = useRoute();
 const router = useRouter();
 
-const loadedProject = (await projectApi.single(route.params.id as string))?.data;
+const loadedProject = (await projectApi.single(route.params.id as string))?.data as Project;
 if (!loadedProject) {
   router.push({ name: 'projects' });
 }
 
-const project = ref<NocodeProject>(loadedProject as NocodeProject);
-const model = reactive<Model>((loadedProject as NocodeProject).model.model);
-console.log(model);
+const project = ref<Project>(loadedProject);
+const model = reactive<Model>(loadedProject?.model);
 </script>
 
 <style>

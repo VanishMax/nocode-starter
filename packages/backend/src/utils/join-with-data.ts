@@ -1,25 +1,14 @@
-import { ObjectId } from 'mongodb';
-
-const joinWithData = (id: string, field: string, otherCollection: string) => {
+const joinWithData = (field: string, otherCollection: string) => {
   return [
-    {
-      $match: {
-        _id: new ObjectId(id) as unknown as string,
-      },
-    },
     {
       $lookup: {
         from: otherCollection,
-        localField: `${field}._id`,
-        foreignField: '_id',
         as: field,
-        let: { users: `$${field}` },
+        let: { [field]: `$${field}` },
         pipeline: [
           {
             $match: {
-              $expr: {
-                $in: ['$_id', `$$${field}._id`],
-              },
+              $expr: { $in: ['$_id', `$$${field}._id`] },
             },
           },
           {
@@ -41,12 +30,10 @@ const joinWithData = (id: string, field: string, otherCollection: string) => {
                 $mergeObjects: [
                   '$docs',
                   {
-                    users: {
-                      $arrayToObject: {
-                        $filter: {
-                          input: { $objectToArray: '$$ROOT' },
-                          cond: { $ne: ['$$this.k', 'docs'] },
-                        },
+                    $arrayToObject: {
+                      $filter: {
+                        input: { $objectToArray: '$$ROOT' },
+                        cond: { $ne: ['$$this.k', 'docs'] },
                       },
                     },
                   },

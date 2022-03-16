@@ -1,19 +1,34 @@
 import { defineStore } from 'pinia';
 import { User, AuthResponse } from 'nocode-starter-core';
-import { LS_CONFIG_NAME } from '~/constants';
+import { LS_TOKEN_NAME } from '~/constants';
+import userApi from './api';
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    user: {} as User,
-    token: '',
+    user: null as User | null,
+    token: localStorage.getItem(LS_TOKEN_NAME) || '',
   }),
   actions: {
     setToken (token: string) {
-      localStorage.setItem(LS_CONFIG_NAME, token);
+      if (!token) {
+        localStorage.removeItem(LS_TOKEN_NAME);
+      } else {
+        localStorage.setItem(LS_TOKEN_NAME, token);
+      }
       this.token = token;
     },
     setAuth (authData: AuthResponse) {
       this.user = authData.user;
+      this.setToken(authData.token);
+    },
+    async checkAuth () {
+      if (!this.token || this.user) return;
+
+      const res = await userApi.profile();
+      if (res.error) this.setToken('');
+      if (res.data) {
+        this.setAuth(res.data);
+      }
     },
   },
 });
