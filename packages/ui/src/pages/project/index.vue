@@ -1,23 +1,12 @@
 <template>
   <suspense>
     <template #default>
-      <section v-if="project" class="app-main">
-        <aside class="sidebar left">
-          <form>
-            <input v-model="model.project_name" type="text" placeholder="Application name">
-          </form>
-        </aside>
-        <main class="app-canvas">
-          <h1>
-            You are in the app
-            {{ model.project_name ? `called ${model.project_name}` : '' }}!
-          </h1>
-        </main>
-        <aside class="sidebar right">
-          <button type="button">
-            Save
-          </button>
-        </aside>
+      <section v-if="project" class="w-full h-screen overflow-hidden flex flex-col">
+        <ProjectHeader :project="project" />
+        <div class="grow h-full flex">
+          <ProjectSidebar />
+          <ProjectCanvas class="grow" />
+        </div>
       </section>
     </template>
     <template #fallback>
@@ -32,6 +21,9 @@ import type { Model, Project } from 'nocode-starter-core';
 import { useRoute, useRouter } from 'vue-router';
 import Spinner from '~/shared/ui/spinner/spinner.vue';
 import projectApi from '~/entities/project/api';
+import ProjectHeader from '~/widgets/project/project-header.vue';
+import ProjectSidebar from '~/widgets/project/project-sidebar.vue';
+import ProjectCanvas from '~/widgets/project/project-canvas.vue';
 
 const route = useRoute();
 const router = useRouter();
@@ -47,27 +39,8 @@ const model = reactive<Model>(loadedProject?.model);
 
 <style>
 .app-main {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   width: 100%;
   height: 100vh;
   overflow: hidden;
-}
-
-.app-main > * {
-  height: 100%;
-}
-
-.sidebar {
-  width: 15%;
-  min-width: 200px;
-  background-color: hsla(0, 0%, 95%);
-  padding: 0.75rem;
-}
-
-.app-canvas {
-  flex-grow: 1;
-  padding: 1rem;
 }
 </style>
