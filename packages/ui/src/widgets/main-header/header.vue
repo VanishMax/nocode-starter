@@ -7,11 +7,10 @@
     </h1>
     <div class="flex items-center">
       <router-link
-        v-if="auth"
-        :to="{ name: 'auth' }"
+        :to="{ name: userStore.isAuth ? 'projects' : 'auth' }"
         class="inline-block mr-4 py-2 px-6 rounded border border-indigo-500 bg-indigo-600 text-white"
       >
-        Auth
+        {{ userStore.isAuth ? 'Projects' : 'Sign In' }}
       </router-link>
       <DarkModeToggle />
     </div>
@@ -20,11 +19,7 @@
 
 <script setup lang="ts">
 import { DarkModeToggle } from '~/features/config';
+import { useUserStore } from '~/entities/user';
 
-defineProps({
-  auth: {
-    type: Boolean,
-    default: false,
-  },
-});
+const userStore = useUserStore();
 </script>

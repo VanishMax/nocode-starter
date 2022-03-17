@@ -8,6 +8,11 @@ export const useUserStore = defineStore('user', {
     user: null as User | null,
     token: localStorage.getItem(LS_TOKEN_NAME) || '',
   }),
+  getters: {
+    isAuth (): boolean {
+      return !!this.user;
+    },
+  },
   actions: {
     setToken (token: string) {
       if (!token) {

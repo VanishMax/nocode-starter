@@ -115,6 +115,7 @@ importers:
 
   packages/ui:
     specifiers:
+      '@heroicons/vue': ^1.0.6
       '@types/tailwindcss': ^3.0.5
       '@typescript-eslint/eslint-plugin': ^5.10.2
       '@typescript-eslint/parser': ^5.10.2
@@ -135,6 +136,7 @@ importers:
       vue-router: ^4.0.12
       vue-tsc: ^0.29.8
     dependencies:
+      '@heroicons/vue': 1.0.6_vue@3.2.29
       pinia: 2.0.11_typescript@4.5.5+vue@3.2.29
       vue: 3.2.29
       vue-router: 4.0.12_vue@3.2.29
@@ -652,6 +654,14 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@heroicons/vue/1.0.6_vue@3.2.29:
+    resolution: {integrity: sha512-ng2YcCQrdoQWEFpw+ipFl2rZo8mZ56v0T5+MyfQQvNqfKChwgP6DMloZLW+rl17GEcHkE3H82UTAMKBKZr4+WA==}
+    peerDependencies:
+      vue: '>= 3'
+    dependencies:
+      vue: 3.2.29
+    dev: false
 
   /@humanwhocodes/config-array/0.9.3:
     resolution: {integrity: sha512-3xSMlXHh03hCcCmFc0rbKp3Ivt2PFEJnQUJDDMTJQ2wkECZWdq4GePs2ctc5H8zV+cHPaq8k2vU8mrQjA6iHdQ==}

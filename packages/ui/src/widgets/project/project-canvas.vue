@@ -1,8 +1,12 @@
 <template>
-  <main class="flex flex-col justify-between px-12 py-10">
-    <MainSlide class="main-slide" />
-    <div class="small-slides w-full flex mt-8">
-      <SmallSlide />
+  <main class="px-12 py-10 dark:bg-gray-700 transition-colors">
+    <div class="h-full flex flex-col justify-between">
+      <div class="top-slide h-4/6 max-h-4/5 mb-2">
+        <MainSlide />
+      </div>
+      <div class="bottom-slides h-1/6 w-full flex mt-2">
+        <SmallSlide />
+      </div>
     </div>
   </main>
 </template>
@@ -11,13 +15,3 @@
 import MainSlide from '~/widgets/project/main-slide.vue';
 import SmallSlide from '~/widgets/project/small-slide.vue';
 </script>
-
-<style scoped>
-.main-slide {
-  height: 70%;
-}
-
-.small-slides {
-  height: 20%;
-}
-</style>

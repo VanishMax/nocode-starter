@@ -4,7 +4,7 @@
       <section v-if="project" class="w-full h-screen overflow-hidden flex flex-col">
         <ProjectHeader :project="project" />
         <div class="grow h-full flex">
-          <ProjectSidebar />
+          <ProjectSidebar class="w-1/5" />
           <ProjectCanvas class="grow" />
         </div>
       </section>
@@ -36,11 +36,3 @@ if (!loadedProject) {
 const project = ref<Project>(loadedProject);
 const model = reactive<Model>(loadedProject?.model);
 </script>
-
-<style>
-.app-main {
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-}
-</style>
