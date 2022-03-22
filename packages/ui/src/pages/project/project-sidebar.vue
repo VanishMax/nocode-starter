@@ -18,9 +18,12 @@
       </button>
 
       <div class="flex flex-col w-full py-2">
-        <ItemShowcase title="Heading">
-          <h1 class="">Hello</h1>
-        </ItemShowcase>
+        <ItemShowcase
+          v-for="(block, i) in blocks"
+          :key="i"
+          :block="block"
+          class="mb-2"
+        />
       </div>
     </div>
   </aside>
@@ -28,5 +31,8 @@
 
 <script setup lang="ts">
 import { TemplateIcon, ChevronDownIcon } from '@heroicons/vue/outline';
+import { getShowcaseBlocks } from 'nocode-starter-core';
 import { ItemShowcase } from '~/features/canvas';
+
+const blocks = getShowcaseBlocks();
 </script>

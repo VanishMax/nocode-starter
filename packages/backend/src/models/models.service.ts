@@ -51,6 +51,6 @@ export class ModelService {
     });
 
     Object.entries(data).forEach(([key, val]) => set(model, key, val));
-    return project;
+    return model;
   }
 }

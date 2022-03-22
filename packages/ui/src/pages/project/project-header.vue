@@ -59,15 +59,10 @@
 </template>
 
 <script setup lang="ts">
-import { PropType } from 'vue';
-import { Project } from 'nocode-starter-core';
 import { ArrowLeftIcon, RewindIcon, FastForwardIcon } from '@heroicons/vue/outline';
 import { DarkModeToggle } from '~/features/config';
+import { useProjectStore } from '~/entities/project';
 
-defineProps({
-  project: {
-    type: Object as PropType<Project>,
-    required: true,
-  },
-});
+const projectStore = useProjectStore();
+const project = projectStore.project;
 </script>

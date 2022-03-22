@@ -1,6 +1,6 @@
 <template>
   <div class="showcase">
-    <label class="block text-sm mb-1 dark:text-gray-300">{{ title }}</label>
+    <label class="block text-xs mb-0.5 dark:text-gray-300">{{ label }}</label>
     <div
       draggable="true"
       :class="[dragging ? 'cursor-grabbing opacity-30' : 'cursor-grab']"
@@ -9,30 +9,27 @@
       @dragstart="dragStart"
       @dragend="dragEnd"
     >
-      <slot />
+      <SlideHeading v-if="block.type === 'heading'" :data="block.data" />
+      <SlideParagraph v-else-if="block.type === 'paragraph'" :data="block.data" />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { computed, PropType } from 'vue';
+import type { SlideBlock } from 'nocode-starter-core';
+import SlideHeading from './blocks/slide-heading.vue';
+import SlideParagraph from './blocks/slide-paragraph.vue';
+import { useDraggable } from '~/features/canvas';
 
-defineProps({
-  title: {
-    type: String,
+const props = defineProps({
+  block: {
+    type: Object as PropType<SlideBlock>,
     required: true,
   },
 });
 
-const dragging = ref(false);
-const dragStart = (e: DragEvent) => {
-  dragging.value = true;
-
-  e.dataTransfer!.setData('text/plain', 'This is text to drag');
-  e.dataTransfer!.dropEffect = 'move';
-};
-const dragEnd = (e: DragEvent) => {
-  e.preventDefault();
-  dragging.value = false;
-};
+const { dragging, dragStart, dragEnd } = useDraggable(props.block);
+const label = computed(() => props.block
+  .type.charAt(0).toUpperCase() + props.block.type.slice(1));
 </script>

@@ -12,6 +12,5 @@
 </template>
 
 <script setup lang="ts">
-import { CanvasSlide } from '~/features/canvas';
-import SmallSlide from '~/widgets/project/small-slide.vue';
+import { CanvasSlide, SmallSlide } from '~/features/canvas';
 </script>
