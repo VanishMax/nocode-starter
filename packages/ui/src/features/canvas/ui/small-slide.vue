@@ -1,11 +1,23 @@
 <template>
   <div
-    class="h-full aspect-video flex justify-center items-center rounded bg-white
-    dark:shadow-gray-100/50 shadow-gray-800/30"
+    :class="[isActive
+      ? 'shadow-indigo-800 dark:shadow-indigo-100/50'
+      : 'shadow-gray-800/30 dark:shadow-gray-100/50']"
+    class="h-full aspect-video flex justify-center items-center
+      rounded bg-white cursor-pointer transition"
   >
-    <span class="text-xl font-bold">+</span>
+    <span class="text-xl font-bold">slide</span>
   </div>
 </template>
+
+<script lang="ts" setup>
+defineProps({
+  isActive: {
+    type: Boolean,
+    default: false,
+  },
+});
+</script>
 
 <style scoped>
 div {

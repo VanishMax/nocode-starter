@@ -1,6 +1,6 @@
 <template>
   <div
-    class="absolute rounded border border-transparent hover:border-blue-400/60"
+    class="absolute p-2 border border-transparent hover:border-blue-400/60 -translate-x-1/2 -translate-y-1/2"
     :style="{ left: `${block.x}%`, top: `${block.y}%`}"
   >
     <SlideHeading v-if="block.type === 'heading'" :data="block.data" />

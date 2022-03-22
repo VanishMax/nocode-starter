@@ -1,7 +1,10 @@
 import { ref } from 'vue';
-import { SlideBlock } from 'nocode-starter-core';
+import type { SlideBlock } from 'nocode-starter-core';
+import { useProjectStore } from '~/entities/project';
 
 export const useDroppable = () => {
+  const projectStore = useProjectStore();
+
   const initialCursorStyles = {
     visibility: 'hidden' as 'hidden' | 'visible',
     left: '0px',
@@ -32,16 +35,17 @@ export const useDroppable = () => {
 
   const drop = (event: DragEvent) => {
     event.stopPropagation();
-    let slide: SlideBlock | null;
+    let block: SlideBlock | null;
     try {
       const targetStyles = (event.target as unknown as HTMLDivElement).getBoundingClientRect();
       const data = event.dataTransfer!.getData('text/plain');
-      slide = JSON.parse(data) as SlideBlock;
-      slide.x = (event.offsetX / targetStyles.width) * 100;
-      slide.y = (event.offsetY / targetStyles.height) * 100;
-      console.log(slide, targetStyles);
+      block = JSON.parse(data) as SlideBlock;
+      block.x = (event.offsetX / targetStyles.width) * 100;
+      block.y = (event.offsetY / targetStyles.height) * 100;
+
+      projectStore.addBlock(block);
     } catch (_) {
-      slide = null;
+      block = null;
     }
 
     dragleave();
