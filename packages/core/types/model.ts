@@ -2,6 +2,7 @@ export type SlideBlockType = 'heading' | 'paragraph';
 
 export interface SlideBlockBase {
   type: SlideBlockType,
+  zIndex: number,
   x: number,
   y: number,
 }
@@ -32,10 +33,12 @@ export interface SlideTypeToDataMap extends Record<SlideBlockType, SlideBlockDat
 export type SlideBlock = SlideBlockHeading | SlideBlockParagraph;
 
 export interface Slide {
-  blocks: SlideBlock[],
+  sort: number,
+  blocks: Record<string, SlideBlock>,
 }
 
 export interface Model {
   _id: string,
-  slides: Slide[],
+  // `slides` could be an array, but it'd be difficult to manage the order if it changes
+  slides: Record<string, Slide>,
 }

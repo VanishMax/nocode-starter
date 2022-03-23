@@ -1,36 +1,56 @@
 import { defineStore } from 'pinia';
 import type { Project, SlideBlock } from 'nocode-starter-core';
+import { v4 as uuidv4 } from 'uuid';
+import * as set from 'lodash.set';
 
 const useProjectStore = defineStore('project', {
   state: () => ({
     project: null as Project | null,
-    activeSlideNumber: 0,
+    activeSlideId: null as string | null,
   }),
   actions: {
     setProject (value: Project | null) {
       this.project = value;
+      this.activeSlideId = Object.keys(value?.model.slides || {})?.[0] || null;
+      if (!this.activeSlideId) {
+        this.createNewSlide();
+      }
     },
-    setActiveSlideNumber (value: number) {
-      this.activeSlideNumber = value;
+    setActiveSlideId (value: string) {
+      this.activeSlideId = value;
+    },
+    setModelData (path: string, value: any) {
+      set(this.project!.model, path, value);
     },
     createNewSlide () {
       const slides = this.project!.model.slides;
-      slides.push({
-        blocks: [],
-      });
-      this.setActiveSlideNumber(slides.length - 1);
+      const len = Object.keys(slides).length;
+      const id = uuidv4();
+      slides[id] = {
+        sort: len,
+        blocks: {},
+      };
+      this.setActiveSlideId(id);
     },
-    addBlock (block: SlideBlock) {
-      if (this.activeSlide && !this.activeSlide.blocks?.length) {
-        this.activeSlide.blocks = [];
+    createNewBlock (block: SlideBlock) {
+      if (this.activeSlide && !Object.keys(this.activeSlide.blocks)?.length) {
+        this.activeSlide.blocks = {};
       }
 
-      this.activeSlide?.blocks.push(block);
+      const slide = this.activeSlide;
+      if (!slide) return;
+
+      const len = Object.keys(slide.blocks).length;
+      const id = uuidv4();
+      this.setModelData(`slides[${this.activeSlideId}].blocks[${id}]`, {
+        ...block,
+        zIndex: len,
+      } as SlideBlock);
     },
   },
   getters: {
     activeSlide (state) {
-      return state.project?.model.slides?.[state.activeSlideNumber] || null;
+      return state.project?.model.slides?.[state.activeSlideId || ''] || null;
     },
   },
 });

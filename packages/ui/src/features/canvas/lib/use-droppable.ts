@@ -43,7 +43,7 @@ export const useDroppable = () => {
       block.x = (event.offsetX / targetStyles.width) * 100;
       block.y = (event.offsetY / targetStyles.height) * 100;
 
-      projectStore.addBlock(block);
+      projectStore.createNewBlock(block);
     } catch (_) {
       block = null;
     }

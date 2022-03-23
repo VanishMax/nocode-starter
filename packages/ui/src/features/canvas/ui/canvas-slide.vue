@@ -16,8 +16,8 @@
 
     <template v-if="slide">
       <SlideBlock
-        v-for="(block, i) in slide.blocks"
-        :key="i"
+        v-for="[key, block] in blocks"
+        :key="key"
         :block="block"
       />
     </template>
@@ -25,8 +25,8 @@
 </template>
 
 <script setup lang="ts">
-import { PropType } from 'vue';
-import type { Slide } from 'nocode-starter-core';
+import { computed, PropType } from 'vue';
+import type { Slide, SlideBlock as SlideBlockType } from 'nocode-starter-core';
 import { useDroppable, useAspectVideoDirective, SlideBlock } from '~/features/canvas';
 
 const props = defineProps({
@@ -35,6 +35,8 @@ const props = defineProps({
     required: true,
   },
 });
+
+const blocks = computed<[string, SlideBlockType][]>(() => Object.entries(props.slide.blocks));
 
 const {
   isDragOver,

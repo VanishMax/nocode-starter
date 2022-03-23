@@ -7,12 +7,12 @@
 
       <div class="bottom-slides h-1/6 w-full flex mt-2">
         <SmallSlide
-          v-for="(slide, i) in model.slides"
-          :key="i"
-          :is-active="i === activeSlideNumber"
+          v-for="[key, slide] in slides"
+          :key="key"
+          :is-active="key === activeSlideId"
           :slide="slide"
           class="mr-4"
-          @click="projectStore.setActiveSlideNumber(i)"
+          @click="projectStore.setActiveSlideId(key)"
         />
 
         <SmallSlideCreate />
@@ -27,11 +27,10 @@ import { CanvasSlide, SmallSlide, SmallSlideCreate } from '~/features/canvas';
 import { useProjectStore } from '~/entities/project';
 
 const projectStore = useProjectStore();
-const model = projectStore.project!.model;
 
-const activeSlideNumber = computed(() => projectStore.activeSlideNumber);
+const model = projectStore.project!.model;
+const activeSlideId = computed(() => projectStore.activeSlideId);
 const activeSlide = computed(() => projectStore.activeSlide);
-if (!activeSlide.value) {
-  projectStore.createNewSlide();
-}
+
+const slides = computed(() => Object.entries(model.slides).sort((a, b) => a[1].sort - b[1].sort));
 </script>

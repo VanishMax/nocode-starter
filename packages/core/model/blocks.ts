@@ -12,6 +12,7 @@ const initialBlockData: SlideTypeToDataMap = {
 export const getShowcaseBlocks = (): SlideBlock[] => {
   return Object.entries(initialBlockData).map(([key, value]) => {
     return {
+      zIndex: 10,
       x: 0,
       y: 0,
       type: key as SlideBlockType,
