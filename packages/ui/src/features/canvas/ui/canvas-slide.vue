@@ -19,6 +19,7 @@
         v-for="[key, block] in blocks"
         :key="key"
         :block="block"
+        :block-id="key"
       />
     </template>
   </div>

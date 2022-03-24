@@ -6,3 +6,4 @@ export { default as SmallSlideCreate } from './ui/small-slide-create.vue';
 export { useDroppable } from './lib/use-droppable';
 export { useDraggable } from './lib/use-draggable';
 export { useAspectVideoDirective } from './lib/aspect-video-directive';
+export { canvasApi } from './api/canvas-api';

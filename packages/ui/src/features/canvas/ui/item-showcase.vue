@@ -9,8 +9,8 @@
       @dragstart="dragStart"
       @dragend="dragEnd"
     >
-      <SlideHeading v-if="block.type === 'heading'" :data="block.data" />
-      <SlideParagraph v-else-if="block.type === 'paragraph'" :data="block.data" />
+      <SlideHeading v-if="block.type === 'heading'" :data="block.data" read-only />
+      <SlideParagraph v-else-if="block.type === 'paragraph'" :data="block.data" read-only />
     </div>
   </div>
 </template>
