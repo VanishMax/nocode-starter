@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import type { Project, SlideBlock } from 'nocode-starter-core';
 import { v4 as uuidv4 } from 'uuid';
 import set from 'lodash.set';
+import projectApi from './api';
 
 const useProjectStore = defineStore('project', {
   state: () => ({
@@ -19,14 +20,19 @@ const useProjectStore = defineStore('project', {
     setActiveSlideId (value: string) {
       this.activeSlideId = value;
     },
-    setModelData (path: string, value: any) {
-      set(this.project!.model, path, value);
+    async setModelData (path: string, value: any) {
+      if (!this.project) return;
+
+      set(this.project.model, path, value);
+      const res = await projectApi.changeModel(this.project._id, {
+        [path]: value,
+      });
     },
     setSlideData (slide: string, path: string, value: any) {
-      this.setModelData(`slides[${slide}].${path}`, value);
+      this.setModelData(`slides.${slide}.${path}`, value);
     },
     setSlideBlockData (slide: string, block: string, path: string, value: any) {
-      this.setSlideData(slide, `blocks[${block}].${path}`, value);
+      this.setSlideData(slide, `blocks.${block}.${path}`, value);
     },
     setActiveSlideData (path: string, value: any) {
       if (!this.activeSlideId) return;
@@ -41,10 +47,10 @@ const useProjectStore = defineStore('project', {
       const slides = this.project!.model.slides;
       const len = Object.keys(slides).length;
       const id = uuidv4();
-      slides[id] = {
+      this.setModelData(`slides.${id}`, {
         sort: len,
         blocks: {},
-      };
+      });
       this.setActiveSlideId(id);
     },
     createNewBlock (block: SlideBlock) {
@@ -57,7 +63,7 @@ const useProjectStore = defineStore('project', {
 
       const len = Object.keys(slide.blocks).length;
       const id = uuidv4();
-      this.setModelData(`slides[${this.activeSlideId}].blocks[${id}]`, {
+      this.setActiveSlideData(`blocks.${id}`, {
         ...block,
         zIndex: len,
       } as SlideBlock);

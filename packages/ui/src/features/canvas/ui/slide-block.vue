@@ -19,6 +19,8 @@
       v-else-if="block.type === 'paragraph'"
       :data="block.data"
       :read-only="!editing"
+      @change="changeData"
+      @blur="toggleEditing(false)"
     />
   </div>
 </template>

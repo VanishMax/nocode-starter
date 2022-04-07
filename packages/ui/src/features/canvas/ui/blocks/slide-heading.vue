@@ -1,5 +1,5 @@
 <template>
-  <h1 v-if="readOnly" class="m-0">{{ data.text }}</h1>
+  <h1 v-if="readOnly" class="text-2xl font-bold m-0">{{ data.text }}</h1>
 
   <input
     v-else
