@@ -5,11 +5,11 @@ import {
   BadRequestException,
 } from '@nestjs/common';
 import { Db, ObjectId } from 'mongodb';
+import set from 'lodash.set';
 import { ModelDto } from './dto/model.dto';
-import { modelData } from './model.data';
 import { ModelEditDto } from './dto/edit-model.dto';
 import { ProjectDto } from '../projects/dto/project.dto';
-import * as set from 'lodash.set';
+import { modelData } from './model.data';
 
 const MODEL_COLLECTION = 'models';
 
@@ -51,6 +51,6 @@ export class ModelService {
     });
 
     Object.entries(data).forEach(([key, val]) => set(model, key, val));
-    return project;
+    return model;
   }
 }

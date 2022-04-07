@@ -1,10 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import type { Model } from 'nocode-starter-core';
+import type { Model, Slide } from 'nocode-starter-core';
 
 export class ModelDataDto implements Omit<Model, '_id'> {
   @ApiProperty()
-  project_name?: string;
-
-  @ApiProperty()
-  color?: string;
+  slides: Record<string, Slide>;
 }

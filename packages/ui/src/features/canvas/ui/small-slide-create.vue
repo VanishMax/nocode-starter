@@ -1,11 +1,18 @@
 <template>
   <div
     class="h-full aspect-video flex justify-center items-center rounded bg-white
-    dark:shadow-gray-100/50 shadow-gray-800/30"
+    dark:shadow-gray-100/50 shadow-gray-800/30 cursor-pointer"
+    @click="createNewSlide"
   >
     <span class="text-xl font-bold">+</span>
   </div>
 </template>
+
+<script lang="ts" setup>
+import { useProjectStore } from '~/entities/project';
+
+const createNewSlide = useProjectStore().createNewSlide;
+</script>
 
 <style scoped>
 div {

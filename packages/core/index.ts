@@ -1,5 +1,9 @@
 export type {
   Model,
+  Slide,
+  SlideBlock,
+  SlideBlockHeading,
+  SlideBlockParagraph,
 } from './types/model';
 
 export {
@@ -23,3 +27,7 @@ export type {
 export {
   ProjectRole,
 } from './types/project';
+
+export {
+  getShowcaseBlocks,
+} from './model/blocks';

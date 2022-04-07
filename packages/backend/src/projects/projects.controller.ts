@@ -73,7 +73,7 @@ export class ProjectController {
   @ProjectRoles(ProjectRole.owner, ProjectRole.editor)
   @ApiOperation({
     description:
-      'Main function for editing the model. It accept the object of type `{ [path]: value }`, where `path` is a path to the model property that needs to be changed, and `value` is any value suitable for this property. For example, `{ color: "black", "page.[0].name": "one"}`',
+      'Main function for editing the model. It accept the object of type `{ [path]: value }`, where `path` is a path to the model property that needs to be changed, and `value` is any value suitable for this property. For example, `{ color: "black", "slides.[0].name": "one"}`',
   })
   async changeModelField(@Param('id') id: string, @Body() body: ModelEditDto) {
     const project = await this.projectService.findOne(id);

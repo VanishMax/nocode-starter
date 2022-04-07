@@ -43,6 +43,12 @@ const projectApi = {
       body: JSON.stringify(data),
     },
   ),
+  /**
+   *
+   * @param id – project id
+   * @param data – an object where key is a path string to a model,
+   *  and value is anything that specifies the path
+   */
   changeModel: async (id: string, data: Record<string, any>) => request<Model>(
     `/projects/${id}`,
     {
