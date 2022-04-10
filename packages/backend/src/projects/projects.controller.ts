@@ -3,12 +3,12 @@ import {
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Param,
   Post,
   Put,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { CreateProjectDto } from './dto/create-project.dto';
 import { ProjectService } from './projects.service';
 import { UserBody } from '../users/users.decorator';
 import { ProjectDto } from './dto/project.dto';
@@ -20,7 +20,7 @@ import { ObjectId } from 'mongodb';
 import { ModelEditDto } from '../models/dto/edit-model.dto';
 import { ModelService } from '../models/models.service';
 
-@Controller('projects')
+@Controller('project')
 @ApiTags('Project')
 export class ProjectController {
   constructor(
@@ -30,23 +30,20 @@ export class ProjectController {
 
   @Get()
   @Auth()
-  async findMy(@UserBody() user: UserDto): Promise<ProjectDto[]> {
-    return await this.projectService.findMy(user._id);
-  }
-
-  @Get(':id')
-  @Auth()
-  async findOne(@Param('id') id: string): Promise<ProjectDto> {
-    return await this.projectService.findOne(id);
+  async findOneOrCreate(@UserBody() user: UserDto): Promise<ProjectDto> {
+    try {
+      return await this.projectService.findOne();
+    } catch (e) {
+      if (e instanceof NotFoundException) {
+        return await this.projectService.create(user);
+      }
+    }
   }
 
   @Post()
   @Auth()
-  async create(
-    @Body() body: CreateProjectDto,
-    @UserBody() user: UserDto,
-  ): Promise<ProjectDto> {
-    return await this.projectService.create(body, user);
+  async create(@UserBody() user: UserDto): Promise<ProjectDto> {
+    return await this.projectService.create(user);
   }
 
   @Post(':id/invite')

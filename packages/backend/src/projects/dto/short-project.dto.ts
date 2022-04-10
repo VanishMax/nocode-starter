@@ -7,9 +7,6 @@ export class ShortProjectDto implements BackendProject {
   _id: string;
 
   @ApiProperty()
-  name: string;
-
-  @ApiProperty()
   users: ShortProjectUserDto[];
 
   @ApiProperty()

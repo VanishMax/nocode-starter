@@ -12,7 +12,7 @@ const projectApi = {
     method: 'GET',
     headers: getHeaders(),
   }),
-  single: async (id: string) => request<Project>(`/projects/${id}`, {
+  single: async () => request<Project>('/project', {
     method: 'GET',
     headers: getHeaders(),
   }),

@@ -7,7 +7,6 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 import { Db, ObjectId } from 'mongodb';
-import { CreateProjectDto } from './dto/create-project.dto';
 import { ModelService } from '../models/models.service';
 import { UserDto } from '../users/dto/user.dto';
 import {
@@ -28,41 +27,22 @@ export class ProjectService {
     private modelService: ModelService,
   ) {}
 
-  async findMy(id: string): Promise<ProjectDto[]> {
-    return await this.db
-      .collection<ShortProjectDto>(PROJECTS_COLLECTION)
-      .aggregate<ProjectDto>([
-        {
-          $match: {
-            'users._id': id,
-          },
-        },
-        {
-          $lookup: {
-            from: 'models',
-            localField: 'model',
-            foreignField: '_id',
-            as: 'model',
-          },
-        },
-        ...joinWithData('users', 'users'),
-      ])
-      .toArray();
-  }
-
-  async findOne(id: string): Promise<ProjectDto> {
-    if (!ObjectId.isValid(id)) throw new BadRequestException();
+  async findOne(id?: string): Promise<ProjectDto> {
+    if (typeof id !== 'undefined' && !ObjectId.isValid(id)) {
+      throw new BadRequestException();
+    }
+    const matcher = {
+      $match:
+        typeof id === 'undefined'
+          ? {}
+          : {
+              _id: new ObjectId(id) as unknown as string,
+            },
+    };
 
     const project = await this.db
       .collection<ShortProjectDto>(PROJECTS_COLLECTION)
-      .aggregate<ProjectDto>([
-        {
-          $match: {
-            _id: new ObjectId(id) as unknown as string,
-          },
-        },
-        ...joinWithData('users', 'users'),
-      ])
+      .aggregate<ProjectDto>([matcher, ...joinWithData('users', 'users')])
       .next();
     if (!project) throw new NotFoundException();
 
@@ -77,7 +57,7 @@ export class ProjectService {
     };
   }
 
-  async create(body: CreateProjectDto, user: UserDto): Promise<ProjectDto> {
+  async create(user: UserDto): Promise<ProjectDto> {
     const model = await this.modelService.create();
 
     const userData: ShortProjectUserDto = {
@@ -87,7 +67,6 @@ export class ProjectService {
 
     const newProject: ShortProjectDto = {
       _id: new ObjectId() as unknown as string,
-      ...body,
       users: [userData],
       online: [],
       model: model._id,

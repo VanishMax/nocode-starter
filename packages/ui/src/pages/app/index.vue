@@ -25,11 +25,10 @@ import ProjectHeader from './project-header.vue';
 import ProjectSidebar from './project-sidebar.vue';
 import ProjectCanvas from './project-canvas.vue';
 
-const route = useRoute();
 const router = useRouter();
 const projectStore = useProjectStore();
 
-const loadedProject = (await projectApi.single(route.params.id as string))?.data as Project;
+const loadedProject = (await projectApi.single())?.data as Project;
 if (!loadedProject) {
   router.push({ name: 'projects' });
 }
