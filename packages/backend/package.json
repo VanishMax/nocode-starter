@@ -2,12 +2,19 @@
   "name": "nocode-starter-backend",
   "version": "0.1.0",
   "private": false,
+  "main": "./dist/run.js",
+  "types": "./dist/run.d.ts",
+  "exports": {
+    ".": "./dist/run.js"
+  },
   "scripts": {
     "prebuild": "rimraf dist",
+    "build:run": "tsup run.ts",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "dev": "nest start --watch",
+    "dev:run": "tsup run.ts --watch --onSuccess \"node dist/run.js\"",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
@@ -52,6 +59,7 @@
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "execa": "^6.1.0",
     "jest": "^27.2.5",
     "nocode-starter-core": "workspace:*",
     "prettier": "^2.3.2",
@@ -60,6 +68,7 @@
     "ts-jest": "^27.0.3",
     "ts-node": "^10.0.0",
     "tsconfig-paths": "^3.10.1",
+    "tsup": "^5.12.4",
     "typescript": "^4.3.5"
   }
 }

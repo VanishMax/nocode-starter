@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "declaration": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "target": "ES2015",
+    "outDir": "./run",
+    "baseUrl": "./",
+    "incremental": true,
+    "strict": true
+  },
+  "include": ["./run.ts"]
+}

@@ -1,13 +1,12 @@
 {
-  "name": "nocode-starter-cli",
-  "description": "CLI for running no-code starter inside the app directory",
+  "name": "create-nocode-starter",
+  "description": "CLI for bootstrapping your no-code solution",
   "version": "0.1.0",
   "engines": {
     "node": ">=14"
   },
   "scripts": {
-    "build": "tsc",
-    "dev": "tsup index.ts --watch --onSuccess \"node dist/index.js\""
+    "build": "tsc"
   },
   "bin": {
     "create-nocode-starter": "dist/index.js"
@@ -15,15 +14,9 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
-    "nocode-starter-backend": "workspace:*"
-  },
   "devDependencies": {
-    "@types/node": "^16.0.0",
-    "execa": "^6.1.0",
-    "ts-node": "10.7.0",
-    "tsup": "^5.12.4",
-    "typescript": "4.6.3"
+    "ts-node": "^10.3.0",
+    "typescript": "^4.4.4"
   },
   "keywords": [
     "no-code",
