@@ -6,24 +6,30 @@
     "node": ">=14"
   },
   "scripts": {
-    "build": "tsc",
-    "dev": "tsup index.ts --watch --onSuccess \"node dist/index.js\""
+    "build": "tsup index.ts --dts-resolve",
+    "dev": "tsup index.ts --onSuccess \"node dist/index.js\""
+  },
+  "tsup": {
+    "external": [
+      "esbuild"
+    ]
   },
   "bin": {
-    "create-nocode-starter": "dist/index.js"
+    "nocode-starter": "dist/index.js"
   },
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
-    "nocode-starter-backend": "workspace:*"
-  },
   "devDependencies": {
     "@types/node": "^16.0.0",
+    "esbuild": "^0.14.36",
     "execa": "^6.1.0",
+    "nocode-starter-backend": "workspace:*",
+    "nocode-starter-ui": "workspace:*",
     "ts-node": "10.7.0",
     "tsup": "^5.12.4",
-    "typescript": "4.6.3"
+    "typescript": "4.6.3",
+    "vite": "^2.7.2"
   },
   "keywords": [
     "no-code",

@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": false,
   "scripts": {},
+  "main": "index.ts",
   "files": [
     "index.ts",
-    "types/**/*"
+    "types/**/*",
+    "model/**/*"
   ],
   "dependencies": {},
   "devDependencies": {

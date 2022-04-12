@@ -6,7 +6,11 @@
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"],
     "strict": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "declaration": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "strictNullChecks": false
   },
   "include": [
     "./index.ts"
