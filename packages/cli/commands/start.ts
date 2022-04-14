@@ -24,15 +24,15 @@ export const start = async () => {
   const tasks = new Listr([
     {
       title: 'UI',
-      task: runPackage.bind(null, 'nocode-starter-ui', 'localhost:3000'),
+      task: runPackage.bind(null, 'nocode-ui', 'localhost:3000'),
     },
     {
       title: 'Backend',
-      task: runPackage.bind(null, 'nocode-starter-backend', 'Nest application successfully started'),
+      task: runPackage.bind(null, 'nocode-backend', 'Nest application successfully started'),
     },
     {
       title: 'Invoker',
-      task: runPackage.bind(null, 'nocode-starter-invoker', 'localhost:3002'),
+      task: runPackage.bind(null, 'nocode-invoker', 'localhost:3002'),
     },
   ], {
     concurrent: true,

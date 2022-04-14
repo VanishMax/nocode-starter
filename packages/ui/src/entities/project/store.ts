@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import type { Project, SlideBlock } from 'nocode-starter-core';
+import type { Project, SlideBlock } from '@nocode/core';
 import { v4 as uuidv4 } from 'uuid';
 import set from 'lodash.set';
 import projectApi from './api';

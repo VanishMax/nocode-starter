@@ -31,7 +31,7 @@
 
 <script setup lang="ts">
 import { TemplateIcon, ChevronDownIcon } from '@heroicons/vue/outline';
-import { getShowcaseBlocks } from 'nocode-starter-core';
+import { getShowcaseBlocks } from '@nocode/core';
 import { ItemShowcase } from '~/features/canvas';
 
 const blocks = getShowcaseBlocks();

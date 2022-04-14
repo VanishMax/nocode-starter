@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import type { Model } from 'nocode-starter-core';
+import type { Model } from '@nocode/core';
 import { MODEL_FILE_PATH } from './constants';
 
 export const loadModel = async () => {

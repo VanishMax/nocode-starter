@@ -1,4 +1,4 @@
-import type { AuthResponse } from 'nocode-starter-core';
+import type { AuthResponse } from '@nocode/core';
 import request from '../../shared/api/request';
 import { useUserStore } from '~/entities/user/store';
 

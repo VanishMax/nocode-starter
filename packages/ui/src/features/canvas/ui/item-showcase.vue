@@ -17,7 +17,7 @@
 
 <script lang="ts" setup>
 import { computed, PropType } from 'vue';
-import type { SlideBlock } from 'nocode-starter-core';
+import type { SlideBlock } from '@nocode/core';
 import SlideHeading from './blocks/slide-heading.vue';
 import SlideParagraph from './blocks/slide-paragraph.vue';
 import { useDraggable } from '~/features/canvas';

@@ -1,11 +1,17 @@
 {
-  "name": "nocode-starter-invoker",
-  "private": true,
+  "name": "@nocode/invoker",
+  "description": "An application that gets the no-code model turns it to a website",
   "version": "0.1.0",
   "main": "./dist/run.js",
   "types": "./dist/run.d.ts",
   "exports": {
     ".": "./dist/run.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "bin": {
+    "nocode-invoker": "dist/run.js"
   },
   "scripts": {
     "dev": "vite",
@@ -18,16 +24,13 @@
     "tsconfig": "./tsconfig.run.json",
     "external": ["vite"]
   },
-  "bin": {
-    "nocode-starter-invoker": "dist/run.js"
-  },
   "dependencies": {
     "vue": "^3.2.25"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.1",
     "execa": "^6.1.0",
-    "nocode-starter-core": "workspace:*",
+    "@nocode/core": "workspace:*",
     "tsup": "^5.12.4",
     "typescript": "^4.5.4",
     "vite": "^2.9.2",

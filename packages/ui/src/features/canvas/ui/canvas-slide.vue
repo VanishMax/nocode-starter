@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import { computed, PropType } from 'vue';
-import type { Slide, SlideBlock as SlideBlockType } from 'nocode-starter-core';
+import type { Slide, SlideBlock as SlideBlockType } from '@nocode/core';
 import { useDroppable, useAspectVideoDirective, SlideBlock } from '~/features/canvas';
 
 const props = defineProps({

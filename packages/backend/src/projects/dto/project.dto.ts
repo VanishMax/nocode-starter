@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { ModelDto } from '../../models/dto/model.dto';
 import { ProjectUserDto } from './project-user.dto';
-import { Project } from 'nocode-starter-core';
+import { Project } from '@nocode/core';
 
 export class ProjectDto implements Project {
   @ApiProperty()

@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { BackendProjectUser, ProjectUser } from 'nocode-starter-core';
+import { BackendProjectUser, ProjectUser } from '@nocode/core';
 import { UserDto } from '../../users/dto/user.dto';
 
 export enum ProjectRole {

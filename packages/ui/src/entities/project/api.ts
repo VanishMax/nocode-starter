@@ -1,4 +1,4 @@
-import type { Project, Model, ShortProjectUser } from 'nocode-starter-core';
+import type { Project, Model, ShortProjectUser } from '@nocode/core';
 import request from '~/shared/api/request';
 import { useUserStore } from '~/entities/user';
 

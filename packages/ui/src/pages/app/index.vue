@@ -17,8 +17,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { Project } from 'nocode-starter-core';
-import { useRoute, useRouter } from 'vue-router';
+import type { Project } from '@nocode/core';
+import { useRouter } from 'vue-router';
 import Spinner from '~/shared/ui/spinner/spinner.vue';
 import { projectApi, useProjectStore } from '~/entities/project';
 import ProjectHeader from './project-header.vue';

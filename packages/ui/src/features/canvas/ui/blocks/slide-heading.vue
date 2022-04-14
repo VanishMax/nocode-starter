@@ -15,7 +15,7 @@
 import {
   nextTick, PropType, ref, watchEffect,
 } from 'vue';
-import type { SlideBlockHeading } from 'nocode-starter-core';
+import type { SlideBlockHeading } from '@nocode/core';
 
 const props = defineProps({
   data: {

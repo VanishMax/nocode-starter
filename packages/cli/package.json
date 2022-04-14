@@ -1,5 +1,5 @@
 {
-  "name": "nocode-starter-cli",
+  "name": "@nocode/cli",
   "description": "CLI for running no-code starter inside the app directory",
   "version": "0.1.0",
   "engines": {
@@ -9,30 +9,23 @@
     "build": "tsup index.ts --dts-resolve",
     "dev": "tsup index.ts --onSuccess \"node dist/index.js start\""
   },
-  "tsup": {
-    "external": [
-      "esbuild"
-    ]
-  },
   "bin": {
-    "nocode-starter": "dist/index.js"
+    "nocode": "dist/index.js"
   },
   "publishConfig": {
     "access": "public"
   },
   "devDependencies": {
+    "@nocode/backend": "workspace:*",
+    "@nocode/invoker": "workspace:*",
+    "@nocode/ui": "workspace:*",
     "@types/listr": "^0.14.4",
     "@types/node": "^16.0.0",
     "chalk": "^5.0.1",
     "commander": "^9.1.0",
-    "esbuild": "^0.14.36",
     "execa": "^6.1.0",
     "listr": "^0.14.3",
-    "nocode-starter-backend": "workspace:*",
-    "nocode-starter-invoker": "workspace:*",
-    "nocode-starter-ui": "workspace:*",
     "rxjs": "^7.5.4",
-    "ts-node": "10.7.0",
     "tsup": "^5.12.4",
     "typescript": "4.6.3",
     "vite": "^2.7.2"

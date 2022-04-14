@@ -28,6 +28,7 @@ importers:
       '@nestjs/schematics': ^8.0.0
       '@nestjs/swagger': ^5.2.0
       '@nestjs/testing': ^8.0.0
+      '@nocode/core': workspace:*
       '@types/express': ^4.17.13
       '@types/jest': 27.4.1
       '@types/jsonwebtoken': ^8.5.8
@@ -48,7 +49,6 @@ importers:
       jsonwebtoken: ^8.5.1
       lodash.set: ^4.3.2
       mongodb: ^4.4.0
-      nocode-starter-core: workspace:*
       passport-jwt: ^4.0.0
       prettier: ^2.3.2
       reflect-metadata: ^0.1.13
@@ -85,6 +85,7 @@ importers:
       '@nestjs/cli': 8.2.1_eslint@8.8.0
       '@nestjs/schematics': 8.0.7_typescript@4.5.5
       '@nestjs/testing': 8.3.1_81bfb54e79f409a20742d878e1eb3272
+      '@nocode/core': link:../core
       '@types/express': 4.17.13
       '@types/jest': 27.4.1
       '@types/jsonwebtoken': 8.5.8
@@ -99,7 +100,6 @@ importers:
       eslint-plugin-prettier: 4.0.0_a5351b466bd3b2a209fc03a65c34b641
       execa: 6.1.0
       jest: 27.5.1_ts-node@10.4.0
-      nocode-starter-core: link:../core
       prettier: 2.5.1
       source-map-support: 0.5.21
       supertest: 6.2.2
@@ -111,57 +111,47 @@ importers:
 
   packages/cli:
     specifiers:
+      '@nocode/backend': workspace:*
+      '@nocode/invoker': workspace:*
+      '@nocode/ui': workspace:*
       '@types/listr': ^0.14.4
       '@types/node': ^16.0.0
       chalk: ^5.0.1
       commander: ^9.1.0
-      esbuild: ^0.14.36
       execa: ^6.1.0
       listr: ^0.14.3
-      nocode-starter-backend: workspace:*
-      nocode-starter-invoker: workspace:*
-      nocode-starter-ui: workspace:*
       rxjs: ^7.5.4
-      ts-node: 10.7.0
       tsup: ^5.12.4
       typescript: 4.6.3
       vite: ^2.7.2
     devDependencies:
+      '@nocode/backend': link:../backend
+      '@nocode/invoker': link:../invoker
+      '@nocode/ui': link:../ui
       '@types/listr': 0.14.4
       '@types/node': 16.11.26
       chalk: 5.0.1
       commander: 9.1.0
-      esbuild: 0.14.36
       execa: 6.1.0
       listr: 0.14.3
-      nocode-starter-backend: link:../backend
-      nocode-starter-invoker: link:../invoker
-      nocode-starter-ui: link:../ui
       rxjs: 7.5.4
-      ts-node: 10.7.0_ddaac8e123aeb260f586984cee874848
-      tsup: 5.12.4_ts-node@10.7.0+typescript@4.6.3
+      tsup: 5.12.4_typescript@4.6.3
       typescript: 4.6.3
       vite: 2.7.13
 
   packages/core:
     specifiers:
+      '@types/node': ^16.0.0
       typescript: ^4.4.4
     devDependencies:
-      typescript: 4.5.5
-
-  packages/create-starter:
-    specifiers:
-      ts-node: ^10.3.0
-      typescript: ^4.4.4
-    devDependencies:
-      ts-node: 10.4.0_typescript@4.5.5
+      '@types/node': 16.11.26
       typescript: 4.5.5
 
   packages/invoker:
     specifiers:
+      '@nocode/core': workspace:*
       '@vitejs/plugin-vue': ^2.3.1
       execa: ^6.1.0
-      nocode-starter-core: workspace:*
       tsup: ^5.12.4
       typescript: ^4.5.4
       vite: ^2.9.2
@@ -170,9 +160,9 @@ importers:
     dependencies:
       vue: 3.2.29
     devDependencies:
+      '@nocode/core': link:../core
       '@vitejs/plugin-vue': 2.3.1_vite@2.9.4+vue@3.2.29
       execa: 6.1.0
-      nocode-starter-core: link:../core
       tsup: 5.12.4_typescript@4.6.3
       typescript: 4.6.3
       vite: 2.9.4
@@ -181,6 +171,7 @@ importers:
   packages/ui:
     specifiers:
       '@heroicons/vue': ^1.0.6
+      '@nocode/core': workspace:*
       '@types/lodash.get': ^4.4.6
       '@types/lodash.set': ^4.3.6
       '@types/node': ^16.0.0
@@ -198,7 +189,6 @@ importers:
       execa: ^6.1.0
       lodash.get: ^4.4.2
       lodash.set: ^4.3.2
-      nocode-starter-core: workspace:*
       pinia: ^2.0.11
       postcss: ^8.4.6
       tailwindcss: ^3.0.18
@@ -218,6 +208,7 @@ importers:
       vue: 3.2.29
       vue-router: 4.0.12_vue@3.2.29
     devDependencies:
+      '@nocode/core': link:../core
       '@types/lodash.get': 4.4.6
       '@types/lodash.set': 4.3.6
       '@types/node': 16.11.26
@@ -233,7 +224,6 @@ importers:
       eslint-plugin-import: 2.25.4_eslint@8.8.0
       eslint-plugin-vue: 8.4.0_eslint@8.8.0
       execa: 6.1.0
-      nocode-starter-core: link:../core
       postcss: 8.4.6
       tailwindcss: 3.0.18_833e1018ad0d7954aa80c53675939269
       tsup: 5.12.4_typescript@4.5.5
@@ -6814,20 +6804,6 @@ packages:
       yaml: 1.10.2
     dev: true
 
-  /postcss-load-config/3.1.1_ts-node@10.7.0:
-    resolution: {integrity: sha512-c/9XYboIbSEUZpiD1UQD0IKiUe8n9WHYV7YFe7X7J+ZwCsEKkUJSFWjS9hBU1RR9THR7jMXst8sxiqP0jjo2mg==}
-    engines: {node: '>= 10'}
-    peerDependencies:
-      ts-node: '>=9.0.0'
-    peerDependenciesMeta:
-      ts-node:
-        optional: true
-    dependencies:
-      lilconfig: 2.0.4
-      ts-node: 10.7.0_ddaac8e123aeb260f586984cee874848
-      yaml: 1.10.2
-    dev: true
-
   /postcss-nested/5.0.6_postcss@8.4.6:
     resolution: {integrity: sha512-rKqm2Fk0KbA8Vt3AdGN0FB9OBOMDVajMG6ZCf/GoHgdxUJ4sBFp0A/uMIRm+MJUdo33YXEtjqIz8u7DAp8B7DA==}
     engines: {node: '>=12.0'}
@@ -8013,66 +7989,6 @@ packages:
       yn: 3.1.1
     dev: true
 
-  /ts-node/10.4.0_typescript@4.5.5:
-    resolution: {integrity: sha512-g0FlPvvCXSIO1JDF6S232P5jPYqBkRL9qly81ZgAOSU7rwI0stphCgd2kLiCrU9DjQCrJMWEqcNSjQL02s6d8A==}
-    hasBin: true
-    peerDependencies:
-      '@swc/core': '>=1.2.50'
-      '@swc/wasm': '>=1.2.50'
-      '@types/node': '*'
-      typescript: '>=2.7'
-    peerDependenciesMeta:
-      '@swc/core':
-        optional: true
-      '@swc/wasm':
-        optional: true
-    dependencies:
-      '@cspotcode/source-map-support': 0.7.0
-      '@tsconfig/node10': 1.0.8
-      '@tsconfig/node12': 1.0.9
-      '@tsconfig/node14': 1.0.1
-      '@tsconfig/node16': 1.0.2
-      acorn: 8.7.0
-      acorn-walk: 8.2.0
-      arg: 4.1.3
-      create-require: 1.1.1
-      diff: 4.0.2
-      make-error: 1.3.6
-      typescript: 4.5.5
-      yn: 3.1.1
-    dev: true
-
-  /ts-node/10.7.0_ddaac8e123aeb260f586984cee874848:
-    resolution: {integrity: sha512-TbIGS4xgJoX2i3do417KSaep1uRAW/Lu+WAL2doDHC0D6ummjirVOXU5/7aiZotbQ5p1Zp9tP7U6cYhA0O7M8A==}
-    hasBin: true
-    peerDependencies:
-      '@swc/core': '>=1.2.50'
-      '@swc/wasm': '>=1.2.50'
-      '@types/node': '*'
-      typescript: '>=2.7'
-    peerDependenciesMeta:
-      '@swc/core':
-        optional: true
-      '@swc/wasm':
-        optional: true
-    dependencies:
-      '@cspotcode/source-map-support': 0.7.0
-      '@tsconfig/node10': 1.0.8
-      '@tsconfig/node12': 1.0.9
-      '@tsconfig/node14': 1.0.1
-      '@tsconfig/node16': 1.0.2
-      '@types/node': 16.11.26
-      acorn: 8.7.0
-      acorn-walk: 8.2.0
-      arg: 4.1.3
-      create-require: 1.1.1
-      diff: 4.0.2
-      make-error: 1.3.6
-      typescript: 4.6.3
-      v8-compile-cache-lib: 3.0.0
-      yn: 3.1.1
-    dev: true
-
   /tsconfig-paths-webpack-plugin/3.5.2:
     resolution: {integrity: sha512-EhnfjHbzm5IYI9YPNVIxx1moxMI4bpHD2e0zTXeDNQcwjjRaGepP7IhTHJkyDBG0CAOoxRfe7jCG630Ou+C6Pw==}
     dependencies:
@@ -8121,35 +8037,6 @@ packages:
       sucrase: 3.21.0
       tree-kill: 1.2.2
       typescript: 4.5.5
-    transitivePeerDependencies:
-      - supports-color
-      - ts-node
-    dev: true
-
-  /tsup/5.12.4_ts-node@10.7.0+typescript@4.6.3:
-    resolution: {integrity: sha512-uUraITfIj2h6rXAdeaVUYrZ2Is9joLFyEGZN5mGAke874JojCizb2MCUcE0wGdcERtyob5mbbFUKkMgal8SlFw==}
-    hasBin: true
-    peerDependencies:
-      typescript: ^4.1.0
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      bundle-require: 3.0.4_esbuild@0.14.34
-      cac: 6.7.12
-      chokidar: 3.5.3
-      debug: 4.3.3
-      esbuild: 0.14.34
-      execa: 5.1.1
-      globby: 11.1.0
-      joycon: 3.1.1
-      postcss-load-config: 3.1.1_ts-node@10.7.0
-      resolve-from: 5.0.0
-      rollup: 2.66.1
-      source-map: 0.7.3
-      sucrase: 3.21.0
-      tree-kill: 1.2.2
-      typescript: 4.6.3
     transitivePeerDependencies:
       - supports-color
       - ts-node
@@ -8448,10 +8335,6 @@ packages:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
     hasBin: true
     dev: false
-
-  /v8-compile-cache-lib/3.0.0:
-    resolution: {integrity: sha512-mpSYqfsFvASnSn5qMiwrr4VKfumbPyONLCOPmsR3A6pTY/r0+tSaVbgPWSAIuzbk3lCTa+FForeTiO+wBQGkjA==}
-    dev: true
 
   /v8-compile-cache/2.3.0:
     resolution: {integrity: sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==}
