@@ -1,22 +1,13 @@
-import { preview } from 'vite';
 import path from 'path';
+import { execa } from 'execa';
 
 const runUI = async () => {
-  const previewServer = await preview({
-    configFile: path.join(__dirname, '..', 'vite.config.ts'),
-    root: path.join(__dirname),
-    preview: {
-      port: 3000,
-      host: '0.0.0.0',
-      open: true,
-    },
-  });
-
-  previewServer.printUrls();
+  await execa('pnpm', ['start'], {
+    cwd: path.join(__dirname, '..'),
+  }).stdout.pipe(process.stdout);
 };
 
 export const bootstrap = () => {
-  console.log('Warming the UI up');
   runUI();
 };
 

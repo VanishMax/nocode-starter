@@ -1,9 +1,16 @@
-import { execa } from 'execa';
+import { program } from 'commander';
+import { start } from './commands/start';
 
-const run = () => {
-  console.info('\x1b[32m%s\x1b[0m', 'Starting the app!');
-  execa('pnpm', ['exec', 'nocode-starter-ui']).stdout.pipe(process.stdout);
-  execa('pnpm', ['exec', 'nocode-starter-backend']).stdout.pipe(process.stdout);
+const init = () => {
+  program
+    .name('no-code')
+    .description('CLI to run a custom no-code app');
+
+  program
+    .command('start')
+    .action(start);
+
+  program.parse();
 };
 
-run();
+init();

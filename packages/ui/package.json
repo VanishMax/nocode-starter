@@ -12,8 +12,9 @@
     "dev:run": "tsup run.ts --watch --onSuccess \"node dist/run.js\"",
     "build:run": "tsup run.ts --dts-resolve",
     "build:vite": "vite build",
-    "build": "pnpm build:bite && pnpm build:run",
-    "lint": "eslint --fix src"
+    "build": "pnpm build:vite && pnpm build:run",
+    "lint": "eslint --fix src",
+    "start": "vite preview"
   },
   "tsup": {
     "tsconfig": "./tsconfig.run.json",

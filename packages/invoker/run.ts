@@ -1,10 +1,14 @@
 import { execa } from 'execa';
 import path from 'path';
 
-export const bootstrap = async () => {
+const runInvoker = async () => {
   await execa('pnpm', ['start'], {
     cwd: path.join(__dirname, '..'),
   }).stdout.pipe(process.stdout);
+};
+
+export const bootstrap = () => {
+  runInvoker();
 };
 
 bootstrap();

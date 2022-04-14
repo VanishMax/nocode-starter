@@ -7,7 +7,7 @@
   },
   "scripts": {
     "build": "tsup index.ts --dts-resolve",
-    "dev": "tsup index.ts --onSuccess \"node dist/index.js\""
+    "dev": "tsup index.ts --onSuccess \"node dist/index.js start\""
   },
   "tsup": {
     "external": [
@@ -21,10 +21,15 @@
     "access": "public"
   },
   "devDependencies": {
+    "@types/listr": "^0.14.4",
     "@types/node": "^16.0.0",
+    "chalk": "^5.0.1",
+    "commander": "^9.1.0",
     "esbuild": "^0.14.36",
     "execa": "^6.1.0",
+    "listr": "^0.14.3",
     "nocode-starter-backend": "workspace:*",
+    "nocode-starter-invoker": "workspace:*",
     "nocode-starter-ui": "workspace:*",
     "ts-node": "10.7.0",
     "tsup": "^5.12.4",
