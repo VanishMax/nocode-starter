@@ -1,24 +1,6 @@
-import { execa } from 'execa';
 import chalk from 'chalk';
 import Listr from 'listr';
-
-const runPackage = (command: string, successMessage: string) => {
-  return new Promise((resolve, reject) => {
-    try {
-      const stream = execa('pnpm', ['exec', command]).stdout;
-      stream.on('data', (chunk: Buffer) => {
-        const output  = chunk.toString();
-        if (output.includes(successMessage)) {
-          resolve(true);
-        }
-      });
-      stream.on('end', () => reject());
-      stream.on('error', () => reject());
-    } catch (e) {
-      reject(e);
-    }
-  });
-};
+import { runPackage } from '../utils/run-package';
 
 export const start = async () => {
   const tasks = new Listr([

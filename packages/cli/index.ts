@@ -1,5 +1,6 @@
 import { program } from 'commander';
 import { start } from './commands/start';
+import { create } from './create';
 
 const init = () => {
   program
@@ -8,7 +9,13 @@ const init = () => {
 
   program
     .command('start')
+    .description('Production start of No-code UI, backend and invoker')
     .action(start);
+
+  program
+    .command('create')
+    .description('Create a No-code application')
+    .action(create);
 
   program.parse();
 };

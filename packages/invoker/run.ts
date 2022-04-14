@@ -1,5 +1,5 @@
 import { execa } from 'execa';
-import path from 'path';
+import * as path from 'path';
 
 const runInvoker = async () => {
   await execa('pnpm', ['start'], {

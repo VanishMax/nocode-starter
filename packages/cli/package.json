@@ -7,7 +7,8 @@
   },
   "scripts": {
     "build": "tsup index.ts --dts-resolve",
-    "dev": "tsup index.ts --onSuccess \"node dist/index.js start\""
+    "dev:start": "tsup index.ts --onSuccess \"node dist/index.js start\"",
+    "dev:create": "tsup index.ts --onSuccess \"node dist/index.js create\""
   },
   "bin": {
     "nocode": "dist/index.js"
@@ -23,6 +24,7 @@
     "@types/node": "^16.0.0",
     "chalk": "^5.0.1",
     "commander": "^9.1.0",
+    "enquirer": "^2.3.6",
     "execa": "^6.1.0",
     "listr": "^0.14.3",
     "rxjs": "^7.5.4",
