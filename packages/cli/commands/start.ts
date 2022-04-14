@@ -1,4 +1,5 @@
 import { execa } from 'execa';
+import chalk from 'chalk';
 import Listr from 'listr';
 
 const runPackage = (command: string, successMessage: string) => {
@@ -39,7 +40,12 @@ export const start = async () => {
 
   try {
     const ctx = await tasks.run();
-    console.info('\x1b[32m%s\x1b[0m', 'The apps are running!');
+
+    console.info();
+    console.info(chalk.magenta('The apps are running!'));
+    console.info(chalk.cyan('No-code app'), 'http://localhost:3000');
+    console.info(chalk.cyan('Swagger API'), 'http://localhost:3001/api/docs');
+    console.info(chalk.cyan('Invoker    '), 'http://localhost:3002');
   } catch (err) {
     console.error(err);
   }
