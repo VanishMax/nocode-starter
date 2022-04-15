@@ -1,4 +1,3 @@
-export const gitignore = () => `
 # dependencies
 node_modules
 .pnp
@@ -20,4 +19,3 @@ yarn-error.log*
 # IDEs
 .vscode
 .idea
-`;

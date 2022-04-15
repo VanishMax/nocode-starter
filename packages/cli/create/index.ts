@@ -46,7 +46,6 @@ export const create = async () => {
   }
 
   console.info();
-  console.info(chalk.magenta('Application successfully created! Now you can run:'));
-  console.info(chalk.cyan(`cd ${name}`));
-  console.info(chalk.cyan(`${manager} start`));
+  console.info(chalk.magenta('Application successfully created!'));
+  console.info(chalk.cyan(`Check the ${name} directory and follow further instructions in the README.md file`));
 };
