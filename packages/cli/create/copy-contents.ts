@@ -1,8 +1,7 @@
 import * as path from 'path';
 import * as fs from 'fs';
 import type { TemplateArgs } from './types';
-import { copy } from '../utils/copy';
-import { removeDir } from '../utils/remove-dir';
+import { copy, removeDir } from '../utils';
 import { contents } from './template';
 
 /**

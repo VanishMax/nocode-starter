@@ -1,5 +1,5 @@
 export default {
-  database_url_env: 'DATABASE_URL',
+  database_url_env: 'BACKEND_DATABASE_CONNECTION',
   database_name: 'nocode-starter',
-  auth_secret_env: 'AUTH_SECRET',
+  auth_secret_env: 'BACKEND_AUTH_SECRET',
 };

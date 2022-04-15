@@ -41,7 +41,7 @@ export const create = async () => {
     }]);
     await install.run();
   } catch (e) {
-    console.error(chalk.red(e));
+    console.error(chalk.redBright(e));
     process.exit();
   }
 

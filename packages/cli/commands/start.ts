@@ -1,8 +1,10 @@
 import chalk from 'chalk';
 import Listr from 'listr';
-import { runPackage } from '../utils/run-package';
+import { runPackage, readEnv } from '../utils';
 
 export const start = async () => {
+  readEnv();
+
   const tasks = new Listr([
     {
       title: 'UI',

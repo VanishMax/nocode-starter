@@ -118,6 +118,7 @@ importers:
       '@types/node': ^16.0.0
       chalk: ^5.0.1
       commander: ^9.1.0
+      dotenv: ^16.0.0
       enquirer: ^2.3.6
       execa: ^6.1.0
       listr: ^0.14.3
@@ -133,6 +134,7 @@ importers:
       '@types/node': 16.11.26
       chalk: 5.0.1
       commander: 9.1.0
+      dotenv: 16.0.0
       enquirer: 2.3.6
       execa: 6.1.0
       listr: 0.14.3
@@ -3346,7 +3348,6 @@ packages:
   /dotenv/16.0.0:
     resolution: {integrity: sha512-qD9WU0MPM4SWLPJy/r2Be+2WgQj8plChsyrCNQzW/0WjvcJQiKQJ9mH3ZgB3fxbUUxgc/11ZJ0Fi5KiimWGz2Q==}
     engines: {node: '>=12'}
-    dev: false
 
   /ecdsa-sig-formatter/1.0.11:
     resolution: {integrity: sha512-nagl3RYrbNv6kQkeJIpt6NJZy8twLB/2vtz6yN9Z4vRKHN4/QZJIEbqohALSgwKdnksuY3k5Addp5lg8sVoVcQ==}

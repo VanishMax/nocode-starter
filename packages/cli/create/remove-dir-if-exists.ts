@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import { prompt } from 'enquirer';
-import { removeDir } from '../utils/remove-dir';
+import { removeDir } from '../utils';
 
 /**
  * If {name} directory exists in {target}, ask to remove it; otherwise quit
