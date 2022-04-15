@@ -1,5 +1,6 @@
 import type { TemplateArgs } from '../types';
 import { packageJson } from './package.json';
+import { envFile } from './.env';
 
 interface TemplateFile {
   type: 'template',
@@ -20,6 +21,11 @@ export const contents: (TemplateFile | CopyFile)[] = [
   {
     type: 'copy',
     name: 'README.md',
+  },
+  {
+    type: 'template',
+    name: '.env',
+    template: envFile,
   },
   {
     type: 'template',
