@@ -14,7 +14,6 @@ export interface BackendProjectUser {
 
 export interface BackendProject {
   _id: string;
-  name: string;
   users: BackendProjectUser[];
   online: string[];
   model: string;

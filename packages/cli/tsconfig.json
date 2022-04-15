@@ -1,18 +1,16 @@
 {
   "compilerOptions": {
-    "target": "ES5",
-    "useDefineForClassFields": true,
-    "module": "commonjs",
-    "lib": ["ESNext", "DOM"],
+    "target": "ES2015",
+    "module": "CommonJS",
     "moduleResolution": "Node",
-    "strict": true,
-    "sourceMap": true,
-    "resolveJsonModule": true,
     "esModuleInterop": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "outDir": "./dist"
+    "lib": ["ESNext", "DOM"],
+    "strict": true,
+    "outDir": "./dist",
+    "declaration": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "strictNullChecks": false
   },
   "include": [
     "./index.ts"

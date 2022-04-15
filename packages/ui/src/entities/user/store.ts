@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { User, AuthResponse } from 'nocode-starter-core';
+import { User, AuthResponse } from '@nocode/core';
 import { LS_TOKEN_NAME } from '~/constants';
 import userApi from './api';
 

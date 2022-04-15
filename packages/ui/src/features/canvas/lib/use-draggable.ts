@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import type { SlideBlock } from 'nocode-starter-core';
+import type { SlideBlock } from '@nocode/core';
 
 export const useDraggable = (block: SlideBlock) => {
   const dragging = ref(false);

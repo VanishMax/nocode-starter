@@ -1,5 +1,5 @@
 {
-  "name": "nocode-starter-repo",
+  "name": "@nocode/repo",
   "version": "0.0.0",
   "private": true,
   "workspaces": [
@@ -14,7 +14,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
-    "prettier": "^2.5.1",
+    "prettier": "^2.6.2",
     "turbo": "latest"
   },
   "engines": {

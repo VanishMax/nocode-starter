@@ -1,14 +1,17 @@
 {
-  "name": "nocode-starter-core",
+  "name": "@nocode/core",
+  "description": "No-code platform core: shared types and utilities",
   "version": "0.1.0",
   "private": false,
   "scripts": {},
+  "main": "index.ts",
   "files": [
     "index.ts",
-    "types/**/*"
+    "types/**/*",
+    "model/**/*"
   ],
-  "dependencies": {},
   "devDependencies": {
+    "@types/node": "^16.0.0",
     "typescript": "^4.4.4"
   }
 }

@@ -27,7 +27,7 @@
 
 <script lang="ts" setup>
 import { PropType, ref } from 'vue';
-import type { SlideBlock } from 'nocode-starter-core';
+import type { SlideBlock } from '@nocode/core';
 import SlideHeading from '~/features/canvas/ui/blocks/slide-heading.vue';
 import SlideParagraph from '~/features/canvas/ui/blocks/slide-paragraph.vue';
 import { useProjectStore } from '~/entities/project';

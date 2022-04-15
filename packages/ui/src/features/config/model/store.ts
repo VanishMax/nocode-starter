@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
-import type { NocodeConfig } from 'nocode-starter-core';
-import { NocodeLanguage } from 'nocode-starter-core';
+import type { NocodeConfig } from '@nocode/core';
+import { NocodeLanguage } from '@nocode/core';
 import { LS_CONFIG_NAME } from '~/constants';
 import darkMode from './dark-mode';
 

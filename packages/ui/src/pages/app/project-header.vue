@@ -2,7 +2,7 @@
   <header class="h-12 py-3 px-8 w-full flex justify-between bg-gradient-to-r from-indigo-700 to-pink-600">
     <div class="flex items-center">
       <router-link
-        :to="{ name: 'projects' }"
+        :to="{ name: 'app' }"
         class="h-8 w-8 flex items-center justify-center hover:bg-gray-100/30 transition-colors rounded"
       >
         <ArrowLeftIcon class="text-white w-4" />

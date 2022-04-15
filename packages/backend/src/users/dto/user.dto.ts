@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import type { User } from 'nocode-starter-core';
+import type { User } from '@nocode/core';
 
 export class UserDto implements User {
   @ApiProperty()

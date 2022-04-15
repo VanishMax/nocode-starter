@@ -17,19 +17,18 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { Project } from 'nocode-starter-core';
-import { useRoute, useRouter } from 'vue-router';
+import type { Project } from '@nocode/core';
+import { useRouter } from 'vue-router';
 import Spinner from '~/shared/ui/spinner/spinner.vue';
 import { projectApi, useProjectStore } from '~/entities/project';
 import ProjectHeader from './project-header.vue';
 import ProjectSidebar from './project-sidebar.vue';
 import ProjectCanvas from './project-canvas.vue';
 
-const route = useRoute();
 const router = useRouter();
 const projectStore = useProjectStore();
 
-const loadedProject = (await projectApi.single(route.params.id as string))?.data as Project;
+const loadedProject = (await projectApi.single())?.data as Project;
 if (!loadedProject) {
   router.push({ name: 'projects' });
 }

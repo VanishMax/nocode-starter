@@ -1,4 +1,4 @@
-import type { Project, Model, ShortProjectUser } from 'nocode-starter-core';
+import type { Project, Model, ShortProjectUser } from '@nocode/core';
 import request from '~/shared/api/request';
 import { useUserStore } from '~/entities/user';
 
@@ -12,7 +12,7 @@ const projectApi = {
     method: 'GET',
     headers: getHeaders(),
   }),
-  single: async (id: string) => request<Project>(`/projects/${id}`, {
+  single: async () => request<Project>('/project', {
     method: 'GET',
     headers: getHeaders(),
   }),

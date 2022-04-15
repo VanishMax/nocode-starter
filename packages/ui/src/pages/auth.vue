@@ -52,6 +52,6 @@ const submit = async () => {
     return;
   }
 
-  await router.push({ name: 'projects' });
+  await router.push({ name: 'app' });
 };
 </script>
