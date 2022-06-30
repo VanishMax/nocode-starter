@@ -8,7 +8,7 @@ const getHeaders = () => ({
 });
 
 const projectApi = {
-  list: async () => request<Project[]>('/projects', {
+  list: async () => request<Project[]>('/project', {
     method: 'GET',
     headers: getHeaders(),
   }),
@@ -16,19 +16,19 @@ const projectApi = {
     method: 'GET',
     headers: getHeaders(),
   }),
-  create: async (data: { name: string }) => request<Project>('/projects/', {
+  create: async (data: { name: string }) => request<Project>('/project/', {
     method: 'POST',
     headers: getHeaders(),
     body: JSON.stringify({
       name: data.name,
     }),
   }),
-  delete: async (id: string) => request<Project>(`/projects/${id}`, {
+  delete: async (id: string) => request<Project>(`/project/${id}`, {
     method: 'DELETE',
     headers: getHeaders(),
   }),
   invite: async (id: string, data: ShortProjectUser[]) => request<ShortProjectUser[]>(
-    `/projects/${id}/invite`,
+    `/project/${id}/invite`,
     {
       method: 'POST',
       headers: getHeaders(),
@@ -36,7 +36,7 @@ const projectApi = {
     },
   ),
   redeemInvite: async (id: string, data: ShortProjectUser[]) => request<ShortProjectUser[]>(
-    `/projects/${id}/invite`,
+    `/project/${id}/invite`,
     {
       method: 'DELETE',
       headers: getHeaders(),
@@ -50,7 +50,7 @@ const projectApi = {
    *  and value is anything that specifies the path
    */
   changeModel: async (id: string, data: Record<string, any>) => request<Model>(
-    `/projects/${id}`,
+    `/project/${id}`,
     {
       method: 'PUT',
       headers: getHeaders(),
