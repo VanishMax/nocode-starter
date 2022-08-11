@@ -15,7 +15,7 @@ import constants from './constants';
             configService.get(constants.database_url_env),
           );
 
-          const db = client.db(constants.database_name);
+          const db = client.db(configService.get(constants.database_name_env));
           await db
             .collection('users')
             .createIndex({ email: 1 }, { unique: true, sparse: true });
