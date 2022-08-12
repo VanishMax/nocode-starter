@@ -2,7 +2,7 @@ import * as path from 'path';
 import { config } from 'dotenv';
 import chalk from 'chalk';
 
-const envKeys = ['BACKEND_DATABASE_CONNECTION', 'BACKEND_AUTH_SECRET'];
+const envKeys = ['SERVER_DATABASE_CONNECTION', 'SERVER_DATABASE_NAME', 'SERVER_AUTH_SECRET'];
 
 /**
  * Read the `.env` file from the application directory and check if all variables are filled.

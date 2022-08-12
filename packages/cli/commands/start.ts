@@ -11,8 +11,8 @@ export const start = async () => {
       task: runPackage.bind(null, 'nocode-ui', 'localhost:3000'),
     },
     {
-      title: 'Backend',
-      task: runPackage.bind(null, 'nocode-backend', 'Nest application successfully started'),
+      title: 'Server',
+      task: runPackage.bind(null, 'nocode-server', 'Nest application successfully started'),
     },
     {
       title: 'Invoker',

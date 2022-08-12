@@ -17,7 +17,7 @@
     "access": "public"
   },
   "devDependencies": {
-    "@nocode/backend": "workspace:*",
+    "@nocode/server": "workspace:*",
     "@nocode/invoker": "workspace:*",
     "@nocode/ui": "workspace:*",
     "@types/listr": "^0.14.4",

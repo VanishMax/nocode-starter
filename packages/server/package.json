@@ -11,7 +11,7 @@
     "access": "public"
   },
   "bin": {
-    "nocode-backend": "dist/run.js"
+    "nocode-server": "dist/run.js"
   },
   "scripts": {
     "prebuild": "rimraf dist",
@@ -30,10 +30,10 @@
     "tsconfig": "./tsconfig.run.json"
   },
   "dependencies": {
-    "@nestjs/common": "9.0.0",
+    "@nestjs/common": "9.0.9",
     "@nestjs/config": "2.2.0",
-    "@nestjs/core": "9.0.0",
-    "@nestjs/platform-express": "9.0.0",
+    "@nestjs/core": "9.0.9",
+    "@nestjs/platform-express": "9.0.9",
     "@nestjs/swagger": "6.0.5",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
@@ -57,7 +57,7 @@
     "@types/jest": "28.1.6",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/lodash.set": "^4.3.7",
-    "@types/node": "18.7.1",
+    "@types/node": "18.7.2",
     "@types/supertest": "^2.0.12",
     "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.33.0",
@@ -73,7 +73,7 @@
     "ts-jest": "28.0.7",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "4.1.0",
-    "tsup": "6.2.1",
+    "tsup": "6.2.2",
     "typescript": "^4.7.4"
   }
 }

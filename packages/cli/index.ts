@@ -9,7 +9,7 @@ const init = () => {
 
   program
     .command('start')
-    .description('Production start of No-code UI, backend and invoker')
+    .description('Production start of No-code UI, server and invoker')
     .action(start);
 
   program

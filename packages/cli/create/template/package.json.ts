@@ -8,7 +8,7 @@ export const packageJson = ({ name }: TemplateArgs): string => {
       start: 'nocode start',
     },
     dependencies: {
-      '@nocode/backend': 'latest',
+      '@nocode/server': 'latest',
       '@nocode/cli': 'latest',
       '@nocode/ui': 'latest',
       '@nocode/invoker': 'latest'
