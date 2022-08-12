@@ -17,11 +17,11 @@
     "access": "public"
   },
   "devDependencies": {
-    "@nocode/server": "workspace:*",
     "@nocode/invoker": "workspace:*",
+    "@nocode/server": "workspace:*",
     "@nocode/ui": "workspace:*",
     "@types/listr": "^0.14.4",
-    "@types/node": "^16.0.0",
+    "@types/node": "18.7.2",
     "chalk": "^5.0.1",
     "commander": "^9.1.0",
     "dotenv": "^16.0.0",
@@ -29,9 +29,9 @@
     "execa": "^6.1.0",
     "listr": "^0.14.3",
     "rxjs": "^7.5.4",
-    "tsup": "^5.12.4",
-    "typescript": "4.6.3",
-    "vite": "^2.7.2"
+    "tsup": "6.2.2",
+    "typescript": "4.7.4",
+    "vite": "3.0.6"
   },
   "keywords": [
     "no-code",

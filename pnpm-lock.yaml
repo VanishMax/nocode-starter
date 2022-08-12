@@ -16,7 +16,7 @@ importers:
       '@nocode/server': workspace:*
       '@nocode/ui': workspace:*
       '@types/listr': ^0.14.4
-      '@types/node': ^16.0.0
+      '@types/node': 18.7.2
       chalk: ^5.0.1
       commander: ^9.1.0
       dotenv: ^16.0.0
@@ -24,15 +24,15 @@ importers:
       execa: ^6.1.0
       listr: ^0.14.3
       rxjs: ^7.5.4
-      tsup: ^5.12.4
-      typescript: 4.6.3
-      vite: ^2.7.2
+      tsup: 6.2.2
+      typescript: 4.7.4
+      vite: 3.0.6
     devDependencies:
       '@nocode/invoker': link:../invoker
       '@nocode/server': link:../server
       '@nocode/ui': link:../ui
       '@types/listr': 0.14.4
-      '@types/node': 16.11.47
+      '@types/node': 18.7.2
       chalk: 5.0.1
       commander: 9.4.0
       dotenv: 16.0.1
@@ -40,16 +40,16 @@ importers:
       execa: 6.1.0
       listr: 0.14.3
       rxjs: 7.5.6
-      tsup: 5.12.9_typescript@4.6.3
-      typescript: 4.6.3
-      vite: 2.9.14
+      tsup: 6.2.2_typescript@4.7.4
+      typescript: 4.7.4
+      vite: 3.0.6
 
   packages/core:
     specifiers:
-      '@types/node': ^16.0.0
-      typescript: ^4.4.4
+      '@types/node': 18.7.2
+      typescript: 4.7.4
     devDependencies:
-      '@types/node': 16.11.47
+      '@types/node': 18.7.2
       typescript: 4.7.4
 
   packages/invoker:
@@ -1452,7 +1452,7 @@ packages:
   /@types/listr/0.14.4:
     resolution: {integrity: sha512-+MWvidNujBUgJsi4yMVwEQQwaHe6oHedPSy+dwk3akGEeuIbvhWkK+TGsXSwbFup7Y0cCBb+wzzdD+yGKp7sOg==}
     dependencies:
-      '@types/node': 16.11.47
+      '@types/node': 18.7.2
       rxjs: 6.6.7
     dev: true
 
@@ -1474,10 +1474,6 @@ packages:
 
   /@types/mime/3.0.1:
     resolution: {integrity: sha512-Y4XFY5VJAuw0FgAqPNd6NNoV44jbq9Bz2L7Rh/J6jLTiHBSBJa9fxqQIvkIld4GsoDOcCbvzOUAbLPsSKKg+uA==}
-    dev: true
-
-  /@types/node/16.11.47:
-    resolution: {integrity: sha512-fpP+jk2zJ4VW66+wAMFoBJlx1bxmBKx4DUFf68UHgdGCOuyUTDlLWqsaNPJh7xhNDykyJ9eIzAygilP/4WoN8g==}
     dev: true
 
   /@types/node/18.7.2:
@@ -7274,41 +7270,6 @@ packages:
   /tslib/2.4.0:
     resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
 
-  /tsup/5.12.9_typescript@4.6.3:
-    resolution: {integrity: sha512-dUpuouWZYe40lLufo64qEhDpIDsWhRbr2expv5dHEMjwqeKJS2aXA/FPqs1dxO4T6mBojo7rvo3jP9NNzaKyDg==}
-    hasBin: true
-    peerDependencies:
-      '@swc/core': ^1
-      postcss: ^8.4.12
-      typescript: ^4.1.0
-    peerDependenciesMeta:
-      '@swc/core':
-        optional: true
-      postcss:
-        optional: true
-      typescript:
-        optional: true
-    dependencies:
-      bundle-require: 3.0.4_esbuild@0.14.54
-      cac: 6.7.12
-      chokidar: 3.5.3
-      debug: 4.3.4
-      esbuild: 0.14.54
-      execa: 5.1.1
-      globby: 11.1.0
-      joycon: 3.1.1
-      postcss-load-config: 3.1.4
-      resolve-from: 5.0.0
-      rollup: 2.77.3
-      source-map: 0.8.0-beta.0
-      sucrase: 3.25.0
-      tree-kill: 1.2.2
-      typescript: 4.6.3
-    transitivePeerDependencies:
-      - supports-color
-      - ts-node
-    dev: true
-
   /tsup/5.12.9_typescript@4.7.4:
     resolution: {integrity: sha512-dUpuouWZYe40lLufo64qEhDpIDsWhRbr2expv5dHEMjwqeKJS2aXA/FPqs1dxO4T6mBojo7rvo3jP9NNzaKyDg==}
     hasBin: true
@@ -7417,6 +7378,42 @@ packages:
       - ts-node
     dev: true
 
+  /tsup/6.2.2_typescript@4.7.4:
+    resolution: {integrity: sha512-vJ9IAdif4GKAz2XMZzjX1hNqhBezJWXjm0qeQEoI7y//a64cxgCF8178eTMV4jBu7YNKnfAPpPSuyXW4mN+9rA==}
+    engines: {node: '>=14'}
+    hasBin: true
+    peerDependencies:
+      '@swc/core': ^1
+      postcss: ^8.4.12
+      typescript: ^4.1.0
+    peerDependenciesMeta:
+      '@swc/core':
+        optional: true
+      postcss:
+        optional: true
+      typescript:
+        optional: true
+    dependencies:
+      bundle-require: 3.0.4_esbuild@0.15.1
+      cac: 6.7.12
+      chokidar: 3.5.3
+      debug: 4.3.4
+      esbuild: 0.15.1
+      execa: 5.1.1
+      globby: 11.1.0
+      joycon: 3.1.1
+      postcss-load-config: 3.1.4
+      resolve-from: 5.0.0
+      rollup: 2.77.3
+      source-map: 0.8.0-beta.0
+      sucrase: 3.25.0
+      tree-kill: 1.2.2
+      typescript: 4.7.4
+    transitivePeerDependencies:
+      - supports-color
+      - ts-node
+    dev: true
+
   /tsutils/3.21.0_typescript@4.7.4:
     resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}
     engines: {node: '>= 6'}
@@ -7458,12 +7455,6 @@ packages:
 
   /typedarray/0.0.6:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
-
-  /typescript/4.6.3:
-    resolution: {integrity: sha512-yNIatDa5iaofVozS/uQJEl3JRWLKKGJKh6Yaiv0GLGSuhpFJe7P3SbHZ8/yjAHRQwKRoA6YZqlfjXWmVzoVSMw==}
-    engines: {node: '>=4.2.0'}
-    hasBin: true
-    dev: true
 
   /typescript/4.7.4:
     resolution: {integrity: sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==}
